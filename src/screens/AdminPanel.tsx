@@ -3,7 +3,7 @@ import { useStore } from "../store";
 import { MATCHES } from "../data/matches";
 import { GROUPS, TEAMS, teamsById, teamsInGroup } from "../data/teams";
 import { PLAYERS } from "../data/players";
-import { FlagBadge } from "../components/FlagBadge";
+import { Flag } from "../components/Flag";
 import { Stepper } from "../components/Stepper";
 import type { PlayerStat, Position } from "../types";
 
@@ -73,7 +73,7 @@ function MatchResults() {
             </div>
             <div className="match__grid">
               <div className="match__team">
-                <FlagBadge flag={home.flag} size={42} />
+                <Flag code={home.id} size={28} />
                 <span>{home.name}</span>
               </div>
               <div className="match__score">
@@ -82,7 +82,7 @@ function MatchResults() {
                 <Stepper value={sc?.away} onChange={(away) => setResultScore(m.id, { home: sc?.home ?? 0, away })} />
               </div>
               <div className="match__team">
-                <FlagBadge flag={away.flag} size={42} />
+                <Flag code={away.id} size={28} />
                 <span>{away.name}</span>
               </div>
             </div>
@@ -128,7 +128,7 @@ function GroupResults() {
         return (
           <div className="grouprow" key={teamId}>
             <div className={"grouprow__pos" + (i < 2 ? " grouprow__pos--q" : "")}>{i + 1}</div>
-            <FlagBadge flag={team.flag} size={30} />
+            <Flag code={team.id} size={20} />
             <div className="grouprow__name">{team.name}</div>
             <div className="grouprow__moves">
               <button className="grouprow__move" onClick={() => move(i, -1)} disabled={i === 0}>▲</button>
@@ -189,7 +189,7 @@ function PlayerResults() {
         return (
           <div className="card" key={p.id} style={{ marginTop: 10, padding: 12 }}>
             <div className="row" style={{ marginBottom: 10 }}>
-              <span style={{ fontSize: 22 }}>{teamsById[p.teamId].flag}</span>
+              <Flag code={p.teamId} size={20} />
               <b style={{ flex: 1 }}>{p.name}</b>
               <span className={"pos-pill pos-" + p.position}>{p.position}</span>
             </div>

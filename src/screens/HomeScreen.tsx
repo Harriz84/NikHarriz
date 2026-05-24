@@ -9,6 +9,7 @@ import {
   SPECIAL_SCORING,
 } from "../data/scoring";
 import type { Tab } from "../components/BottomNav";
+import { PoolIcon, ShirtIcon, StarIcon, TrophyIcon } from "../components/icons";
 
 const KICKOFF = new Date("2026-06-11T18:00:00");
 
@@ -43,7 +44,8 @@ export function HomeScreen({ onNavigate }: { onNavigate: (t: Tab) => void }) {
       <div className="hero">
         <div className="hero__label">Nog te gaan</div>
         <div className="hero__big">
-          {daysToGo} {daysToGo === 1 ? "dag" : "dagen"}
+          <span className="ac">{daysToGo}</span>{" "}
+          {daysToGo === 1 ? "dag" : "dagen"}
         </div>
         <div className="hero__sub">tot de aftrap van WK26 · 11 juni 2026</div>
       </div>
@@ -72,19 +74,19 @@ export function HomeScreen({ onNavigate }: { onNavigate: (t: Tab) => void }) {
       <div className="section-title">Snel invullen</div>
       <div className="choice-grid">
         <button className="choice" onClick={() => onNavigate("pool")}>
-          <span style={{ fontSize: 22 }}>🎯</span>
+          <PoolIcon />
           <span>Uitslagen voorspellen</span>
         </button>
         <button className="choice" onClick={() => onNavigate("fantasy")}>
-          <span style={{ fontSize: 22 }}>👕</span>
+          <ShirtIcon />
           <span>Elftal samenstellen</span>
         </button>
         <button className="choice" onClick={() => onNavigate("specials")}>
-          <span style={{ fontSize: 22 }}>⭐</span>
+          <StarIcon />
           <span>Specials kiezen</span>
         </button>
         <button className="choice" onClick={() => onNavigate("leaderboard")}>
-          <span style={{ fontSize: 22 }}>🏆</span>
+          <TrophyIcon />
           <span>Klassement bekijken</span>
         </button>
       </div>

@@ -24,7 +24,7 @@ export function Header({ tab }: { tab: string }) {
       <div className="header__row">
         <div>
           <div className="wordmark">
-            WK<span className="pill">26</span>POOL
+            WK<span className="ac">26</span>&nbsp;POOL
           </div>
           <div className="header__sub">{SUBTITLES[tab] ?? ""}</div>
         </div>

@@ -3,6 +3,7 @@ import { useStore, activeParticipant } from "../store";
 import { PLAYERS, playersById } from "../data/players";
 import { TEAMS, teamsById } from "../data/teams";
 import { MAX_PER_COUNTRY, SQUAD_SIZE } from "../data/scoring";
+import { Flag } from "../components/Flag";
 import type { Position } from "../types";
 
 const POS_ORDER: Position[] = ["GK", "DEF", "MID", "FWD"];
@@ -83,22 +84,21 @@ export function FantasyScreen() {
                   <div className="slot__name">{POS_LABEL[pos]}</div>
                 </div>
               ) : (
-                byLine[pos].map((p) => {
-                  const team = teamsById[p.teamId];
-                  return (
-                    <button
-                      className="slot"
-                      key={p.id}
-                      onClick={() => toggle(p.id)}
-                      title="Tik om te verwijderen"
-                    >
-                      <div className="slot__badge">{team.flag}</div>
-                      <div className="slot__name">
-                        {p.name.split(" ").slice(-1)[0]}
-                      </div>
-                    </button>
-                  );
-                })
+                byLine[pos].map((p) => (
+                  <button
+                    className="slot"
+                    key={p.id}
+                    onClick={() => toggle(p.id)}
+                    title="Tik om te verwijderen"
+                  >
+                    <div className="slot__badge">
+                      <Flag code={p.teamId} size={28} />
+                    </div>
+                    <div className="slot__name">
+                      {p.name.split(" ").slice(-1)[0]}
+                    </div>
+                  </button>
+                ))
               )}
             </div>
           ))}
@@ -153,7 +153,7 @@ export function FantasyScreen() {
                 (disabled ? " prow--disabled" : "")
               }
             >
-              <span style={{ fontSize: 24 }}>{team.flag}</span>
+              <Flag code={p.teamId} size={19} />
               <div className="prow__info">
                 <div className="prow__name">{p.name}</div>
                 <div className="prow__meta">

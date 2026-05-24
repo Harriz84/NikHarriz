@@ -1,7 +1,7 @@
 import { useStore, activeParticipant } from "../store";
 import { TEAMS, teamsById } from "../data/teams";
 import { PLAYERS, playersById } from "../data/players";
-import { FlagBadge } from "../components/FlagBadge";
+import { Flag } from "../components/Flag";
 import { SPECIAL_SCORING } from "../data/scoring";
 
 function PlayerSelect({
@@ -49,7 +49,7 @@ export function SpecialsScreen() {
     <div className="screen">
       <div className="card">
         <div className="row" style={{ justifyContent: "space-between" }}>
-          <h3>🏆 Wereldkampioen</h3>
+          <h3>Wereldkampioen</h3>
           <span className="tag">{SPECIAL_SCORING.champion} pt</span>
         </div>
         <p className="subtle" style={{ margin: "6px 0 12px" }}>
@@ -57,8 +57,8 @@ export function SpecialsScreen() {
         </p>
         {champion && (
           <div className="row" style={{ marginBottom: 12 }}>
-            <FlagBadge flag={champion.flag} size={44} />
-            <b style={{ fontSize: 18 }}>{champion.name}</b>
+            <Flag code={champion.id} size={28} />
+            <b style={{ fontSize: 17 }}>{champion.name}</b>
           </div>
         )}
         <select
@@ -76,7 +76,7 @@ export function SpecialsScreen() {
 
       <div className="card">
         <div className="row" style={{ justifyContent: "space-between" }}>
-          <h3>⚽ Topscorer</h3>
+          <h3>Topscorer</h3>
           <span className="tag">{SPECIAL_SCORING.topScorer} pt</span>
         </div>
         <p className="subtle" style={{ margin: "6px 0 12px" }}>
@@ -84,10 +84,8 @@ export function SpecialsScreen() {
         </p>
         {topScorer && (
           <div className="row" style={{ marginBottom: 12 }}>
-            <span style={{ fontSize: 26 }}>
-              {teamsById[topScorer.teamId].flag}
-            </span>
-            <b style={{ fontSize: 16 }}>{topScorer.name}</b>
+            <Flag code={topScorer.teamId} size={22} />
+            <b style={{ fontSize: 15 }}>{topScorer.name}</b>
           </div>
         )}
         <PlayerSelect
@@ -98,7 +96,7 @@ export function SpecialsScreen() {
 
       <div className="card">
         <div className="row" style={{ justifyContent: "space-between" }}>
-          <h3>⭐ Speler van het toernooi</h3>
+          <h3>Speler van het toernooi</h3>
           <span className="tag">{SPECIAL_SCORING.playerOfTournament} pt</span>
         </div>
         <p className="subtle" style={{ margin: "6px 0 12px" }}>
@@ -106,8 +104,8 @@ export function SpecialsScreen() {
         </p>
         {pott && (
           <div className="row" style={{ marginBottom: 12 }}>
-            <span style={{ fontSize: 26 }}>{teamsById[pott.teamId].flag}</span>
-            <b style={{ fontSize: 16 }}>{pott.name}</b>
+            <Flag code={pott.teamId} size={22} />
+            <b style={{ fontSize: 15 }}>{pott.name}</b>
           </div>
         )}
         <PlayerSelect

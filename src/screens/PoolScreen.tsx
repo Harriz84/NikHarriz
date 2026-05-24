@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useStore, activeParticipant } from "../store";
 import { MATCHES } from "../data/matches";
 import { GROUPS, teamsById } from "../data/teams";
-import { FlagBadge } from "../components/FlagBadge";
+import { Flag } from "../components/Flag";
 import { Stepper } from "../components/Stepper";
 
 const MONTHS = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
@@ -66,7 +66,7 @@ function Matches() {
             </div>
             <div className="match__grid">
               <div className="match__team">
-                <FlagBadge flag={home.flag} size={54} />
+                <Flag code={home.id} size={34} />
                 <span>{home.name}</span>
               </div>
               <div className="match__score">
@@ -85,7 +85,7 @@ function Matches() {
                 />
               </div>
               <div className="match__team">
-                <FlagBadge flag={away.flag} size={54} />
+                <Flag code={away.id} size={34} />
                 <span>{away.name}</span>
               </div>
             </div>
@@ -143,7 +143,7 @@ function Groups() {
               <div className={"grouprow__pos" + (i < 2 ? " grouprow__pos--q" : "")}>
                 {i + 1}
               </div>
-              <FlagBadge flag={team.flag} size={30} />
+              <Flag code={team.id} size={20} />
               <div className="grouprow__name">{team.name}</div>
               <div className="grouprow__moves">
                 <button
