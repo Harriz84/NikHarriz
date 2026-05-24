@@ -7,6 +7,7 @@ import {
   GROUP_SCORING,
   POOL_SCORING,
   SPECIAL_SCORING,
+  TOTAL_QUESTIONS,
 } from "./data/scoring";
 
 const sign = (n: number) => (n > 0 ? 1 : n < 0 ? -1 : 0);
@@ -56,45 +57,64 @@ export interface ScoreBreakdown {
   total: number;
 }
 
+function totalPoints(
+  pred: number | null,
+  actual: number | null,
+  tiers: [number, number][],
+): number {
+  if (pred == null || actual == null) return 0;
+  const diff = Math.abs(pred - actual);
+  for (const [maxDiff, pts] of tiers) if (diff <= maxDiff) return pts;
+  return 0;
+}
+
 export function scoreParticipant(p: Participant, r: Results): ScoreBreakdown {
   const pred = p.prediction;
+  const roundBoost = pred.roundBoost ?? {};
+  const jokerPositions = pred.jokerPositions ?? {};
 
-  // --- Pool: per groep, met joker-verdubbeling ---
+  // --- Pool: per wedstrijd, met boost-team (dubbele punten per ronde) ---
   let pool = 0;
-  for (const group of GROUPS) {
-    const groupMatches = MATCHES.filter((m) => m.group === group);
-    let groupPts = 0;
-    for (const m of groupMatches) {
-      groupPts += matchPoints(pred.matchScores[m.id], r.matchScores[m.id]);
+  for (const m of MATCHES) {
+    let pts = matchPoints(pred.matchScores[m.id], r.matchScores[m.id]);
+    const boostTeam = roundBoost[m.matchday];
+    if (boostTeam && (boostTeam === m.homeId || boostTeam === m.awayId)) {
+      pts *= 2;
     }
-    if (pred.jokerGroups.includes(group)) groupPts *= 2;
-    pool += groupPts;
+    pool += pts;
   }
 
-  // --- Groepsstanden ---
+  // --- Groepsstanden, met joker-positie (dubbele punten op 1 plek) ---
   let groups = 0;
   for (const group of GROUPS) {
     const predicted = pred.groupOrder[group];
     const actual = r.groupOrder[group];
     if (!predicted || !actual || actual.length < 4) continue;
     let correct = 0;
+    const joker = jokerPositions[group];
     for (let i = 0; i < 4; i++) {
-      if (predicted[i] && predicted[i] === actual[i]) correct++;
+      if (predicted[i] && predicted[i] === actual[i]) {
+        correct++;
+        let pts = GROUP_SCORING.perCorrectPosition;
+        if (joker === i) pts *= 2;
+        groups += pts;
+      }
     }
-    groups += correct * GROUP_SCORING.perCorrectPosition;
     if (correct === 4) groups += GROUP_SCORING.perfectBonus;
   }
 
-  // --- Fantasy elftal ---
+  // --- Fantasy elftal, met aanvoerder (dubbele punten) ---
   let fantasy = 0;
   for (const playerId of pred.fantasyEleven) {
     const player = playersById[playerId];
     if (!player) continue;
     const stat = r.playerStats[playerId] ?? EMPTY_STAT;
-    fantasy += playerPoints(stat, player.position);
+    let pts = playerPoints(stat, player.position);
+    if (pred.captain && pred.captain === playerId) pts *= 2;
+    fantasy += pts;
   }
 
-  // --- Specials ---
+  // --- Specials + extra toernooivragen ---
   let specials = 0;
   if (pred.champion && pred.champion === r.champion)
     specials += SPECIAL_SCORING.champion;
@@ -102,6 +122,9 @@ export function scoreParticipant(p: Participant, r: Results): ScoreBreakdown {
     specials += SPECIAL_SCORING.topScorer;
   if (pred.playerOfTournament && pred.playerOfTournament === r.playerOfTournament)
     specials += SPECIAL_SCORING.playerOfTournament;
+  for (const q of TOTAL_QUESTIONS) {
+    specials += totalPoints(pred[q.key], r[q.key], q.tiers);
+  }
 
   return {
     pool,

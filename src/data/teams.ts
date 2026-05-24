@@ -1,8 +1,24 @@
 import type { Team } from "../types";
 
+// Primaire shirtkleur per land (voor de fantasy-shirts).
+const COLORS: Record<string, string> = {
+  MEX: "#02753b", RSA: "#007a4d", KOR: "#c9112e", CZE: "#11457e",
+  CAN: "#d52b1e", BIH: "#16216b", JPN: "#0b1f5e", KSA: "#0a6b34",
+  USA: "#16264f", WAL: "#c8102e", EGY: "#c8102e", PAR: "#cd2a3e",
+  ARG: "#5aa7e0", NOR: "#b00b2d", NGA: "#0f7a47", CRC: "#c8102e",
+  FRA: "#1b2a78", SUI: "#d52b1e", GHA: "#0f7a47", NZL: "#1c1c1c",
+  BRA: "#f5d916", SRB: "#b22832", CMR: "#0a6b4f", PAN: "#16264f",
+  ESP: "#b81020", SWE: "#1c6cae", CIV: "#ff7a1a", QAT: "#7a1530",
+  ENG: "#dfe3ea", POL: "#cf1b2b", SEN: "#0f7a47", AUS: "#f5c400",
+  GER: "#161616", DEN: "#bd1a2c", TUN: "#dc1a26", IRN: "#dfe3ea",
+  POR: "#9c1a26", TUR: "#cf1b2b", MAR: "#9c1a26", ECU: "#f5c400",
+  NED: "#f3711b", AUT: "#cf1b2b", ALG: "#0f7a47", URU: "#4aa3e0",
+  BEL: "#cf1b2b", CRO: "#cf1b2b", COL: "#f5c400", SCO: "#16469e",
+};
+
 // 48-team field for WK26, drawn into 12 groups (A–L) of 4.
-// Flags are emoji so no image assets are needed.
-export const TEAMS: Team[] = [
+// Flags are emoji (dropdowns) + echte vlag-SVG's (Flag-component).
+const RAW: Omit<Team, "color">[] = [
   // Group A
   { id: "MEX", name: "Mexico", flag: "🇲🇽", group: "A" },
   { id: "RSA", name: "Zuid-Afrika", flag: "🇿🇦", group: "A" },
@@ -64,6 +80,11 @@ export const TEAMS: Team[] = [
   { id: "COL", name: "Colombia", flag: "🇨🇴", group: "L" },
   { id: "SCO", name: "Schotland", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", group: "L" },
 ];
+
+export const TEAMS: Team[] = RAW.map((t) => ({
+  ...t,
+  color: COLORS[t.id] ?? "#3a3f4a",
+}));
 
 export const GROUPS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
 

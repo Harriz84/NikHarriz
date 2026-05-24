@@ -2,7 +2,7 @@ import { useStore, activeParticipant } from "../store";
 import { TEAMS, teamsById } from "../data/teams";
 import { PLAYERS, playersById } from "../data/players";
 import { Flag } from "../components/Flag";
-import { SPECIAL_SCORING } from "../data/scoring";
+import { SPECIAL_SCORING, TOTAL_QUESTIONS } from "../data/scoring";
 
 function PlayerSelect({
   value,
@@ -37,6 +37,7 @@ function PlayerSelect({
 export function SpecialsScreen() {
   const participant = useStore(activeParticipant);
   const setSpecial = useStore((s) => s.setSpecial);
+  const setPredTotal = useStore((s) => s.setPredTotal);
   const pred = participant.prediction;
 
   const champion = pred.champion ? teamsById[pred.champion] : null;
@@ -113,6 +114,32 @@ export function SpecialsScreen() {
           onChange={(v) => setSpecial("playerOfTournament", v)}
         />
       </div>
+
+      <div className="section-title">Extra vragen</div>
+      {TOTAL_QUESTIONS.map((q) => (
+        <div className="card" key={q.key}>
+          <div className="row" style={{ justifyContent: "space-between" }}>
+            <h3>{q.label}</h3>
+            <span className="tag">max {q.tiers[0][1]} pt</span>
+          </div>
+          <p className="subtle" style={{ margin: "6px 0 12px" }}>
+            {q.hint}
+          </p>
+          <input
+            type="number"
+            min={0}
+            inputMode="numeric"
+            placeholder="Jouw schatting…"
+            value={pred[q.key] ?? ""}
+            onChange={(e) =>
+              setPredTotal(
+                q.key,
+                e.target.value === "" ? null : Math.max(0, Number(e.target.value) || 0),
+              )
+            }
+          />
+        </div>
+      ))}
     </div>
   );
 }

@@ -480,11 +480,12 @@ function slug(name: string): string {
 
 export const PLAYERS: Player[] = Object.entries(SQUADS).flatMap(
   ([teamId, entries]) =>
-    entries.map(([name, position]) => ({
+    entries.map(([name, position], i) => ({
       id: `${teamId}-${slug(name)}`,
       name,
       teamId,
       position,
+      number: i + 1,
     })),
 );
 

@@ -5,6 +5,7 @@ import { GROUPS, TEAMS, teamsById, teamsInGroup } from "../data/teams";
 import { PLAYERS } from "../data/players";
 import { Flag } from "../components/Flag";
 import { Stepper } from "../components/Stepper";
+import { TOTAL_QUESTIONS } from "../data/scoring";
 import type { PlayerStat, Position } from "../types";
 
 type AdminTab = "matches" | "groups" | "players" | "specials";
@@ -220,6 +221,7 @@ function PlayerResults() {
 function SpecialResults() {
   const results = useStore((s) => s.results);
   const setResultSpecial = useStore((s) => s.setResultSpecial);
+  const setResultTotal = useStore((s) => s.setResultTotal);
 
   return (
     <>
@@ -247,6 +249,31 @@ function SpecialResults() {
         value={results.playerOfTournament}
         onChange={(v) => setResultSpecial("playerOfTournament", v)}
       />
+
+      <div className="section-title">Extra vragen (totalen)</div>
+      {TOTAL_QUESTIONS.map((q) => (
+        <div className="row" key={q.key} style={{ marginBottom: 8 }}>
+          <span style={{ flex: 1, fontSize: 13.5, fontWeight: 600 }}>
+            {q.label}
+          </span>
+          <input
+            type="number"
+            min={0}
+            inputMode="numeric"
+            placeholder="—"
+            value={results[q.key] ?? ""}
+            onChange={(e) =>
+              setResultTotal(
+                q.key,
+                e.target.value === ""
+                  ? null
+                  : Math.max(0, Number(e.target.value) || 0),
+              )
+            }
+            style={{ width: 110 }}
+          />
+        </div>
+      ))}
     </>
   );
 }

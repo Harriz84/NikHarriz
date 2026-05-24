@@ -110,11 +110,13 @@ export function HomeScreen({ onNavigate }: { onNavigate: (t: Tab) => void }) {
             <b>juiste uitslag-tendens:</b> {POOL_SCORING.result}
           </li>
           <li>
-            <b>Joker per groep:</b> verdubbelt je poolpunten in die groep
+            <b>Boost-team per ronde:</b> dubbele punten voor de wedstrijd van je
+            gekozen team
           </li>
           <li>
             <b>Groepsstand:</b> {GROUP_SCORING.perCorrectPosition} per juiste plek
-            · +{GROUP_SCORING.perfectBonus} als de hele groep klopt
+            · +{GROUP_SCORING.perfectBonus} als de hele groep klopt ·{" "}
+            <b>joker-positie</b> = dubbele punten
           </li>
           <li>
             <b>Fantasy-speler:</b> speelt {FANTASY_SCORING.appearance} · assist{" "}
@@ -128,12 +130,13 @@ export function HomeScreen({ onNavigate }: { onNavigate: (t: Tab) => void }) {
             {FANTASY_SCORING.goalByPosition.GK}
           </li>
           <li>
-            <b>Keeper clean sheet:</b> {FANTASY_SCORING.cleanSheetGK} punten
+            <b>Keeper clean sheet:</b> {FANTASY_SCORING.cleanSheetGK} punten ·{" "}
+            <b>aanvoerder:</b> dubbele punten
           </li>
           <li>
             <b>Specials:</b> kampioen {SPECIAL_SCORING.champion} · topscorer{" "}
             {SPECIAL_SCORING.topScorer} · speler v/h toernooi{" "}
-            {SPECIAL_SCORING.playerOfTournament}
+            {SPECIAL_SCORING.playerOfTournament} · totalen (goals/kaarten)
           </li>
         </ul>
       </div>

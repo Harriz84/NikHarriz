@@ -3,25 +3,45 @@ import { persist } from "zustand/middleware";
 import type {
   MatchScore,
   Participant,
+  Position,
   PlayerStat,
   Prediction,
   Results,
 } from "./types";
 import { GROUPS, teamsInGroup } from "./data/teams";
-import { MAX_PER_COUNTRY, SQUAD_SIZE } from "./data/scoring";
+import {
+  DEFAULT_FORMATION,
+  FORMATIONS,
+  MAX_PER_COUNTRY,
+} from "./data/scoring";
 import { playersById } from "./data/players";
+
+type TotalKey = "totalGoals" | "totalYellow" | "totalRed";
+type SpecialKey = "champion" | "topScorer" | "playerOfTournament";
+
+function capFor(formation: string, pos: Position): number {
+  if (pos === "GK") return 1;
+  const f = FORMATIONS[formation] ?? FORMATIONS[DEFAULT_FORMATION];
+  return f[pos];
+}
 
 function emptyPrediction(): Prediction {
   const groupOrder: Record<string, string[]> = {};
   for (const g of GROUPS) groupOrder[g] = teamsInGroup(g).map((t) => t.id);
   return {
+    formation: DEFAULT_FORMATION,
     matchScores: {},
     groupOrder,
-    jokerGroups: [],
+    jokerPositions: {},
+    roundBoost: {},
     fantasyEleven: [],
+    captain: null,
     champion: null,
     topScorer: null,
     playerOfTournament: null,
+    totalGoals: null,
+    totalYellow: null,
+    totalRed: null,
   };
 }
 
@@ -35,6 +55,9 @@ function emptyResults(): Results {
     champion: null,
     topScorer: null,
     playerOfTournament: null,
+    totalGoals: null,
+    totalYellow: null,
+    totalRed: null,
     published: false,
   };
 }
@@ -61,21 +84,20 @@ interface State {
   // editing the active participant's prediction
   setMatchScore: (matchId: string, score: MatchScore) => void;
   setGroupOrder: (group: string, order: string[]) => void;
-  toggleJoker: (group: string) => void;
+  setJokerPosition: (group: string, position: number | null) => void;
+  setRoundBoost: (matchday: number, teamId: string | null) => void;
+  setFormation: (formation: string) => void;
   toggleFantasyPlayer: (playerId: string) => void;
-  setSpecial: (
-    key: "champion" | "topScorer" | "playerOfTournament",
-    value: string | null,
-  ) => void;
+  setCaptain: (playerId: string | null) => void;
+  setSpecial: (key: SpecialKey, value: string | null) => void;
+  setPredTotal: (key: TotalKey, value: number | null) => void;
 
   // official results (admin)
   setResultScore: (matchId: string, score: MatchScore) => void;
   setResultGroupOrder: (group: string, order: string[]) => void;
   setPlayerStat: (playerId: string, stat: Partial<PlayerStat>) => void;
-  setResultSpecial: (
-    key: "champion" | "topScorer" | "playerOfTournament",
-    value: string | null,
-  ) => void;
+  setResultSpecial: (key: SpecialKey, value: string | null) => void;
+  setResultTotal: (key: TotalKey, value: number | null) => void;
   togglePublished: () => void;
 
   resetAll: () => void;
@@ -110,7 +132,11 @@ export const useStore = create<State>()(
           return {
             participants: [
               ...s.participants,
-              { id, name: name.trim() || `Speler ${s.participants.length + 1}`, prediction: emptyPrediction() },
+              {
+                id,
+                name: name.trim() || `Speler ${s.participants.length + 1}`,
+                prediction: emptyPrediction(),
+              },
             ],
             activeId: id,
           };
@@ -150,40 +176,90 @@ export const useStore = create<State>()(
           })),
         ),
 
-      toggleJoker: (group) =>
+      setJokerPosition: (group, position) =>
         set((s) =>
           withActive(s, (pred) => {
-            const has = pred.jokerGroups.includes(group);
-            return {
-              ...pred,
-              jokerGroups: has
-                ? pred.jokerGroups.filter((g) => g !== group)
-                : [...pred.jokerGroups, group],
+            const next = { ...(pred.jokerPositions ?? {}) };
+            if (position === null || next[group] === position) delete next[group];
+            else next[group] = position;
+            return { ...pred, jokerPositions: next };
+          }),
+        ),
+
+      setRoundBoost: (matchday, teamId) =>
+        set((s) =>
+          withActive(s, (pred) => {
+            const next = { ...(pred.roundBoost ?? {}) };
+            if (teamId === null || next[matchday] === teamId)
+              delete next[matchday];
+            else next[matchday] = teamId;
+            return { ...pred, roundBoost: next };
+          }),
+        ),
+
+      setFormation: (formation) =>
+        set((s) =>
+          withActive(s, (pred) => {
+            const counts: Record<Position, number> = {
+              GK: 0,
+              DEF: 0,
+              MID: 0,
+              FWD: 0,
             };
+            const kept: string[] = [];
+            for (const id of pred.fantasyEleven) {
+              const pos = playersById[id]?.position;
+              if (!pos) continue;
+              if (counts[pos] < capFor(formation, pos)) {
+                kept.push(id);
+                counts[pos]++;
+              }
+            }
+            const captain =
+              pred.captain && kept.includes(pred.captain) ? pred.captain : null;
+            return { ...pred, formation, fantasyEleven: kept, captain };
           }),
         ),
 
       toggleFantasyPlayer: (playerId) =>
         set((s) =>
           withActive(s, (pred) => {
-            const has = pred.fantasyEleven.includes(playerId);
-            if (has) {
+            const player = playersById[playerId];
+            if (!player) return pred;
+            if (pred.fantasyEleven.includes(playerId)) {
               return {
                 ...pred,
                 fantasyEleven: pred.fantasyEleven.filter((id) => id !== playerId),
+                captain: pred.captain === playerId ? null : pred.captain,
               };
             }
-            if (pred.fantasyEleven.length >= SQUAD_SIZE) return pred;
-            const teamId = playersById[playerId]?.teamId;
+            // positie-cap volgens opstelling
+            const samePos = pred.fantasyEleven.filter(
+              (id) => playersById[id]?.position === player.position,
+            ).length;
+            if (samePos >= capFor(pred.formation, player.position)) return pred;
+            // max 2 per land
             const sameCountry = pred.fantasyEleven.filter(
-              (id) => playersById[id]?.teamId === teamId,
+              (id) => playersById[id]?.teamId === player.teamId,
             ).length;
             if (sameCountry >= MAX_PER_COUNTRY) return pred;
             return { ...pred, fantasyEleven: [...pred.fantasyEleven, playerId] };
           }),
         ),
 
+      setCaptain: (playerId) =>
+        set((s) =>
+          withActive(s, (pred) => {
+            if (playerId !== null && !pred.fantasyEleven.includes(playerId))
+              return pred;
+            return { ...pred, captain: pred.captain === playerId ? null : playerId };
+          }),
+        ),
+
       setSpecial: (key, value) =>
+        set((s) => withActive(s, (pred) => ({ ...pred, [key]: value }))),
+
+      setPredTotal: (key, value) =>
         set((s) => withActive(s, (pred) => ({ ...pred, [key]: value }))),
 
       setResultScore: (matchId, score) =>
@@ -204,15 +280,14 @@ export const useStore = create<State>()(
 
       setPlayerStat: (playerId, stat) =>
         set((s) => {
-          const prev =
-            s.results.playerStats[playerId] ?? {
-              apps: 0,
-              goals: 0,
-              assists: 0,
-              yellow: 0,
-              red: 0,
-              cleanSheets: 0,
-            };
+          const prev = s.results.playerStats[playerId] ?? {
+            apps: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0,
+            red: 0,
+            cleanSheets: 0,
+          };
           return {
             results: {
               ...s.results,
@@ -225,6 +300,9 @@ export const useStore = create<State>()(
         }),
 
       setResultSpecial: (key, value) =>
+        set((s) => ({ results: { ...s.results, [key]: value } })),
+
+      setResultTotal: (key, value) =>
         set((s) => ({ results: { ...s.results, [key]: value } })),
 
       togglePublished: () =>
@@ -244,7 +322,7 @@ export const useStore = create<State>()(
         });
       },
     }),
-    { name: "wk26-pool" },
+    { name: "wk26-pool-v2" },
   ),
 );
 

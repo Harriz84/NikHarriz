@@ -965,3 +965,139 @@ select {
   font-weight: 500;
   margin-bottom: 12px;
 }
+
+/* ---------- Shirt (fantasy) ---------- */
+.shirt {
+  position: relative;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+}
+.shirt__c {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #2a2000;
+  font-size: 9.5px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #0b1f18;
+}
+.slot__shirt {
+  position: relative;
+}
+.slot__tap {
+  display: block;
+}
+.slot__x {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #0b1f18;
+  z-index: 2;
+}
+.slot__name--empty {
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- Sortable (versleepbare groepsstand) ---------- */
+.sortlist {
+  display: flex;
+  flex-direction: column;
+}
+.sortrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sortrow:last-child {
+  border-bottom: none;
+}
+.sortrow--drag {
+  background: var(--panel-2);
+  border-radius: var(--r-sm);
+  border-bottom-color: transparent;
+}
+.sortrow__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+.draghandle {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  color: var(--faint);
+  border-radius: var(--r-sm);
+  touch-action: none;
+}
+.draghandle:active {
+  background: var(--panel-3);
+  color: var(--text);
+}
+
+.grouprow__pos {
+  cursor: pointer;
+}
+.grouprow__pos--joker {
+  background: rgba(243, 197, 78, 0.2);
+  color: var(--gold);
+  box-shadow: inset 0 0 0 1.5px var(--gold);
+}
+.jokerstar {
+  position: absolute;
+  margin: -14px 0 0 14px;
+  font-size: 10px;
+}
+
+/* boost-team per ronde + 2x badge */
+.x2 {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--accent-weak);
+  color: var(--accent);
+}
+.boostcard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.boostcard .row__txt {
+  flex: 1;
+}
+.boostcard b {
+  font-size: 13px;
+}
+.boostcard p {
+  margin: 1px 0 0;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.boostcard select {
+  width: 150px;
+}
