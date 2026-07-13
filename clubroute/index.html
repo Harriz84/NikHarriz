@@ -1,1 +1,86 @@
-<!doctype html><html><body>placeholder</body></html>
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06140f">
+<meta name="description" content="Clubroute: raad samen online de voetballer aan de hand van zijn clubcarrière.">
+<title>Clubroute — Online voetbalduel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand">CLUB<span>ROUTE</span></div><div id="networkStatus" class="sys">ONLINE DUEL SYSTEM // READY</div></header>
+
+  <section id="home" class="screen on">
+    <div class="home">
+      <div class="panel"><div class="head">Online voetbalduel</div><div class="body">
+        <h1>Raad de<br><span>voetballer</span></h1>
+        <p class="intro">Maak een privékamer, deel de link en speel live tegen een vriend. Jullie zien tegelijk de clubroute. De eerste juiste inzending pakt de punten.</p>
+        <div class="features"><div class="feat"><b>2</b><small>telefoons, één live duel</small></div><div class="feat"><b>20</b><small>bekende loopbanen</small></div><div class="feat"><b>1</b><small>gedeelde uitnodigingslink</small></div></div>
+      </div></div>
+      <div class="panel"><div class="head" id="homePanelTitle">Maak of open een kamer</div><div class="body">
+        <div id="hostForm" class="form">
+          <label>Jouw naam<input id="hostName" maxlength="18" value="Nick" autocomplete="nickname"></label>
+          <label>Aantal rondes<select id="roundCount"><option value="5">5 — snelle pot</option><option value="10" selected>10 — normale wedstrijd</option><option value="15">15 — lange sessie</option></select></label>
+          <label>Niveau<select id="difficulty"><option value="easy">Scout — clubnamen zichtbaar</option><option value="normal" selected>Manager — alleen clublogo’s</option><option value="expert">Legend — geen extra spelersinformatie</option></select></label>
+          <button class="primary" onclick="createRoom()">Maak online kamer</button>
+          <div class="divider">OF</div>
+          <label>Kamercode<input id="manualRoom" maxlength="16" placeholder="bijv. CR-A7K9P2" autocomplete="off"></label>
+          <button class="secondary" onclick="openManualJoin()">Open bestaande kamer</button>
+        </div>
+        <div id="joinForm" class="form" style="display:none">
+          <div class="mini">Je bent uitgenodigd voor kamer</div><div id="joinCode" class="roomcode"></div>
+          <label>Jouw naam<input id="guestName" maxlength="18" value="Vriend" autocomplete="nickname"></label>
+          <button class="primary" onclick="joinRoom()">Deelnemen aan duel</button>
+          <button class="secondary" onclick="cancelJoin()">Terug</button>
+        </div>
+        <div id="homeError" class="notice" style="display:none"></div>
+      </div></div>
+    </div>
+    <div class="footer">De verbinding loopt rechtstreeks tussen beide browsers via PeerJS. Laat beide spelers deze pagina tijdens het duel openhouden.</div>
+  </section>
+
+  <section id="lobby" class="screen">
+    <div class="invite panel"><div class="head">Privékamer</div><div class="body center">
+      <div class="mini">Kamercode</div><div id="roomCode" class="roomcode"></div>
+      <div id="hostShareBlock">
+        <p>Stuur deze link naar je vriend:</p>
+        <div class="linkbox"><input id="inviteLink" readonly><button onclick="copyInvite()">Kopieer link</button></div>
+        <button class="secondary" onclick="shareInvite()">Delen via telefoon</button>
+      </div>
+      <div id="lobbyWaiting" class="waiting"><span class="dot"></span><span>Wachten tot je vriend verbinding maakt…</span></div>
+      <div class="players"><div class="playercard"><div class="mini">Thuismanager</div><strong id="lobbyP1">—</strong><div class="status" id="lobbyS1">Verbonden</div></div><div class="playercard"><div class="mini">Uitmanager</div><strong id="lobbyP2">—</strong><div class="status" id="lobbyS2">Nog niet verbonden</div></div></div>
+      <button id="startMatchBtn" class="primary" onclick="hostStartMatch()" disabled>Start wedstrijd</button>
+      <button class="danger" onclick="leaveRoom()">Kamer verlaten</button>
+    </div></div>
+  </section>
+
+  <section id="game" class="screen">
+    <div class="game">
+      <aside class="sidebar panel"><div class="head">Live scorebord</div>
+        <div id="scoreCard0" class="scoreplayer"><div id="scoreName0" class="name">Speler 1</div><div id="score0" class="score">0</div><div id="correct0" class="mini">0 rondes gewonnen</div></div>
+        <div id="scoreCard1" class="scoreplayer"><div id="scoreName1" class="name">Speler 2</div><div id="score1" class="score">0</div><div id="correct1" class="mini">0 rondes gewonnen</div></div>
+        <div class="roundbox"><div><div class="mini">Ronde</div><b id="roundLabel">1 / 10</b></div><div class="progress"><i id="roundProgress"></i></div><div class="mini">Eén antwoord per speler. Fout is definitief voor die ronde.</div><button class="danger" onclick="leaveRoom()">Duel verlaten</button></div>
+      </aside>
+      <main class="panel main"><div class="head">Spelerdossier // live clubhistorie</div>
+        <div class="gamehead"><div><div class="mini">Wie herkent hem het eerst?</div><div class="turn"><span>Beide managers</span> zijn aan zet</div></div><div id="timer" class="timer">30</div></div>
+        <div id="clueBar" class="cluebar"></div>
+        <div class="careerlabel">Chronologische clubroute</div><div id="career" class="career"></div>
+        <div class="answer"><div class="answerrow"><input id="answerInput" list="playerNames" placeholder="Vul de naam van de voetballer in…" autocomplete="off"><datalist id="playerNames"></datalist><button id="answerBtn" class="primary" onclick="submitGuess()">Dien antwoord in</button></div><div id="message" class="msg"></div></div>
+        <div class="duelstatus"><div id="guessState0" class="guessstate"><strong id="guessName0">Speler 1</strong><span>Denkt na…</span></div><div id="guessState1" class="guessstate"><strong id="guessName1">Speler 2</strong><span>Denkt na…</span></div></div>
+        <div id="gameLog" class="log"></div>
+      </main>
+    </div>
+  </section>
+
+  <section id="end" class="screen"><div class="panel end"><div class="head">Eindrapport</div><div class="body"><div class="trophy">🏆</div><div class="mini">Winnaar van het online duel</div><h1 id="winnerText"><span>—</span></h1><p id="winnerSub"></p><div class="final"><div><b id="finalName0">—</b><strong id="finalScore0">0</strong></div><div><b id="finalName1">—</b><strong id="finalScore1">0</strong></div></div><button class="primary" onclick="returnHome()">Nieuwe kamer</button></div></div></section>
+</div>
+
+<div id="resultOverlay" class="overlay"><div class="modal"><div class="head">Ronde afgerond</div><div class="modalbody"><div class="mini">De juiste speler was</div><div id="resultAnswer" class="answername">—</div><p id="resultText"></p><div class="waiting"><span class="dot"></span><span>Volgende ronde wordt geladen…</span></div></div></div></div>
+
+<script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+<script src="players.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
