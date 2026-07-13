@@ -21,3 +21,14 @@ const PLAYERS=[
 {name:"Wayne Rooney",a:["rooney","wayne rooney"],nation:"Engeland",position:"Aanvaller",clubs:[C("Everton","evertonfc.com"),C("Manchester United","manutd.com"),C("Everton","evertonfc.com"),C("D.C. United","dcunited.com"),C("Derby County","dcfc.co.uk")]},
 {name:"Cesc Fàbregas",a:["fabregas","cesc fabregas","cesc"],nation:"Spanje",position:"Middenvelder",clubs:[C("Arsenal","arsenal.com"),C("FC Barcelona","fcbarcelona.com"),C("Chelsea","chelseafc.com"),C("AS Monaco","asmonaco.com"),C("Como 1907","comofootball.com")]}
 ];
+
+// Multiplayer hotfix: de visuele antwoordstatus mag de beoordeling door de host niet vooraf blokkeren.
+window.addEventListener('load',()=>{
+  window.applyGuessStatus=function(player,text){
+    const e=document.getElementById('guessState'+player);
+    if(!e)return;
+    e.className='guessstate done';
+    const status=e.querySelector('span');
+    if(status)status.textContent=text;
+  };
+});
