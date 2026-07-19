@@ -1,10 +1,11 @@
-name: Publish Clubroute
+name: Publish websites
 
 on:
   push:
     branches: ["main"]
     paths:
       - "clubroute/**"
+      - "index.html"
       - ".github/workflows/deploy-clubroute.yml"
   workflow_dispatch:
 
@@ -32,10 +33,19 @@ jobs:
         with:
           enablement: true
 
-      - name: Upload Clubroute website
+      - name: Assemble public website
+        run: |
+          rm -rf public
+          mkdir -p public
+          cp index.html public/index.html
+          cp -R clubroute public/clubroute
+          cp -R clubroute/gezinsuitjes public/gezinsuitjes
+          touch public/.nojekyll
+
+      - name: Upload complete website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: clubroute
+          path: public
 
       - name: Deploy to GitHub Pages
         id: deployment
