@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="nl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Mijn Levenskompas</title>
+<meta name="description" content="Nick Gerrits' persoonlijke interactieve levensprotocol met 51 snel vindbare protocollen.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="orb orb-a"></div><div class="orb orb-b"></div>
+<div class="app">
+<header class="topbar"><div><div class="kicker">PERSOONLIJK LEVENSPROTOCOL</div><h1>Mijn Levenskompas</h1></div><button id="themeBtn" class="iconbtn" aria-label="Wissel thema">☀</button></header>
+<main>
+<section class="hero">
+<div class="hero-copy"><span class="eyebrow">Als ik vastloop</span><h2>Niet alles oplossen.<br><em>De volgende juiste stap.</em></h2><p>Zoek op gevoel, situatie, persoon of protocolnummer. Open alleen wat nu relevant is.</p></div>
+<div class="hero-actions"><button class="primary" id="kompasBtn">Open KOMPAS</button><button class="secondary" data-filter="all">Alle protocollen</button></div>
+</section>
+<section class="traffic-wrap"><h3>Hoe staat mijn systeem erbij?</h3><div class="traffic"><button data-traffic="green"><span class="light green"></span>Groen<small>ruimte en overzicht</small></button><button data-traffic="orange"><span class="light orange"></span>Oranje<small>spanning loopt op</small></button><button data-traffic="red"><span class="light red"></span>Rood<small>stop en ontlast</small></button></div></section>
+<section class="search-section" id="protocollen"><div class="searchbox"><span>⌕</span><input id="search" type="search" autocomplete="off" placeholder="Zoek: collega, boos, uitstellen, ouders…"><button id="clearSearch" aria-label="Wis zoekveld">×</button></div><div class="chips" id="chips"><button class="chip active" data-category="all">Alles</button><button class="chip" data-category="innerlijk">Innerlijk</button><button class="chip" data-category="emoties">Emoties</button><button class="chip" data-category="werk">Werk</button><button class="chip" data-category="relaties">Relaties</button><button class="chip" data-category="favorites">★ Favorieten</button></div></section>
+<section><div class="section-title"><div><span class="eyebrow">SNEL VINDEN</span><h3>Herkenbare situaties</h3></div></div><div class="situation-grid" id="situations"></div></section>
+<section><div class="section-title"><div><span class="eyebrow">OPZOEKBOEK</span><h3 id="listTitle">Alle protocollen</h3></div><span id="count"></span></div><div id="protocolList" class="protocol-list"></div></section>
+</main>
+</div>
+<div class="sheet" id="sheet" aria-hidden="true"><div class="sheet-panel"><div class="drag"></div><button class="sheet-close" id="sheetClose" aria-label="Sluiten">×</button><div id="sheetBody"></div></div></div>
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><button class="modal-close" id="modalClose">×</button><div id="modalBody"></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="data/meta.js"></script>
+<script src="data/part1.js"></script><script src="data/part2.js"></script><script src="data/part3.js"></script><script src="data/part4.js"></script><script src="data/part5.js"></script><script src="data/part6.js"></script>
+<script src="app.js"></script>
+</body></html>
