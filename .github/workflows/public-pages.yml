@@ -44,12 +44,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Record successful deployment
+      - name: Record deployment result
+        if: always()
         run: |
           mkdir -p .github
-          printf '%s\n' "${{ steps.deployment.outputs.page_url }}" > .github/pages-deployed.txt
+          {
+            printf 'status=%s\n' "${{ job.status }}"
+            printf 'url=%s\n' "${{ steps.deployment.outputs.page_url }}"
+            printf 'run=%s\n' "${{ github.run_id }}"
+          } > .github/pages-deployment-status.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .github/pages-deployed.txt
-          git diff --cached --quiet || git commit -m "Record Pages deployment"
+          git add .github/pages-deployment-status.txt
+          git diff --cached --quiet || git commit -m "Record Pages deployment status"
           git push
