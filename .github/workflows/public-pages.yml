@@ -35,8 +35,10 @@ jobs:
           <!doctype html><html lang="nl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Apps</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Arial;background:#edf2f4;color:#082746;padding:30px}main{max-width:700px;margin:auto}a{display:block;background:white;padding:20px;margin:12px 0;border-radius:16px;text-decoration:none;color:#082746;font-size:22px;font-weight:800;box-shadow:0 8px 24px #08274618}</style><main><h1>Apps van Harriz84</h1><a href="./berlijn-2026/">Berlijn 2026 Reisapp</a><a href="./levenskompas/">Levenskompas</a></main></html>
           EOF
           touch _site/.nojekyll
-      - name: Configure GitHub Pages
+      - name: Configure and enable GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
