@@ -190,3 +190,112 @@
   .infographic-grid{grid-template-columns:1fr}
   .info-block,.info-block.wide{grid-column:1;min-height:0}
 }
+
+/* Horizontale fotogalerijen: native vegen op iPhone met vijf vaste beelden. */
+.photo-carousel{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:linear-gradient(145deg,#486f7a,#17384d);
+}
+.photo-track{
+  display:flex;
+  width:100%;
+  height:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  touch-action:pan-x pan-y;
+}
+.photo-track::-webkit-scrollbar{display:none}
+.photo-slide{
+  flex:0 0 100%;
+  width:100%;
+  height:100%;
+  margin:0;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  position:relative;
+  overflow:hidden;
+}
+.media .photo-slide img,
+.media.loaded .photo-slide img,
+.info-hero .photo-slide img{
+  position:static;
+  inset:auto;
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+}
+.photo-progress{
+  position:absolute;
+  z-index:7;
+  right:10px;
+  bottom:48px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 7px;
+  border:1px solid #ffffff38;
+  border-radius:999px;
+  color:#fff;
+  background:#061a2ed9;
+  pointer-events:none;
+  box-shadow:0 3px 12px #0003;
+}
+.photo-dots{display:flex;gap:4px}
+.photo-dots span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#ffffff70;
+  transition:width .18s ease,background .18s ease;
+}
+.photo-dots span.active{width:16px;border-radius:999px;background:#fff}
+.photo-count{font-size:10px;font-weight:900;white-space:nowrap}
+.stop .media:after{
+  content:"Veeg voor 5 foto’s · tik voor de gids";
+  left:62px;
+  right:10px;
+  text-align:center;
+}
+.info-hero:after{z-index:1}
+.info-hero .photo-progress{
+  top:15px;
+  bottom:auto;
+  left:50%;
+  right:auto;
+  transform:translateX(-50%);
+}
+.info-hero .info-title{z-index:5;pointer-events:none}
+@media(max-width:620px){
+  .photo-progress{bottom:46px}
+  .info-hero .photo-progress{
+    top:18px;
+    max-width:170px;
+  }
+}
+.photo-sources{
+  margin:14px 0 4px;
+  padding:12px 14px;
+  border:1px solid #d8e1e9;
+  border-radius:14px;
+  background:#f7fafc;
+  color:#4b5d6a;
+  font-size:12px;
+}
+.photo-sources summary{
+  cursor:pointer;
+  color:var(--b);
+  font-weight:850;
+}
+.photo-sources ol{margin:10px 0 0;padding-left:22px}
+.photo-sources li{margin:6px 0;line-height:1.45}
+.photo-sources a{color:#0a5c98;font-weight:750}

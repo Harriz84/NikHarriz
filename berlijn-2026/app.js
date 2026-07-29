@@ -1,5 +1,6 @@
 const DAYS = window.BERLIN_DAY_PARTS || [];
 const GUIDE_CONTENT = window.BERLIN_GUIDE_CONTENT || {};
+const GALLERY_DATA = window.BERLIN_GALLERIES || {};
 const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
 }[char]));
@@ -188,16 +189,28 @@ const saving = leg => {
 };
 const ratingFor = stop => RATINGS[RATING_ALIASES[stop.title] || stop.title] || {score:null,url:tripSearch(stop.title)};
 const photoFor = stop => PHOTO_MAP[stop.title] ? "assets/photos/"+PHOTO_MAP[stop.title] : "";
+const galleryFor = stop => {
+  const explicit=(GALLERY_DATA[stop.title] || []).map(item => typeof item === "string" ? {src:item,alt:stop.title} : item);
+  const primary=photoFor(stop);
+  if(primary && !explicit.some(item=>item.src===primary)) explicit.unshift({src:primary,alt:stop.title});
+  return explicit.length ? explicit.slice(0,5) : primary ? [{src:primary,alt:stop.title}] : [];
+};
 const stars = score => {
   const rating = Number(score) || 0;
   const label = rating ? `${rating.toFixed(1)} van 5 sterren` : "Geen afzonderlijke Tripadvisor-score gecontroleerd";
   return `<span class="trip-stars" aria-label="${label}" title="${label}"><span class="stars-empty">★★★★★</span><span class="stars-fill" style="width:${rating * 20}%">★★★★★</span></span>`;
 };
 
+function carousel(stop, extraClass=""){
+  const images=galleryFor(stop);
+  if(!images.length) return `<div class="fallback"><b>${esc(stop.typeIcon)}</b><span>Geen locatiebeeld beschikbaar</span></div>`;
+  return `<div class="photo-carousel ${extraClass}" data-carousel aria-label="Fotogalerij van ${esc(stop.title)}"><div class="photo-track">${images.map((item,index)=>`<figure class="photo-slide"><img src="${esc(item.src)}" alt="${esc(item.alt || `${stop.title}, foto ${index+1}`)}" loading="${index===0?"eager":"lazy"}" decoding="async"></figure>`).join("")}</div><div class="photo-progress" aria-hidden="true"><div class="photo-dots">${images.map((_,index)=>`<span${index===0?' class="active"':""}></span>`).join("")}</div><span class="photo-count">1 / ${images.length}</span></div></div>`;
+}
+
 function media(stop){
-  const local=photoFor(stop);
+  const local=galleryFor(stop).length>0;
   const wiki=!local&&stop.wiki_exact ? esc(stop.wiki_exact) : "";
-  return `<div class="media${local?" loaded":""}" data-stop="${esc(stop.uid)}" data-wiki="${wiki}" role="button" tabindex="0" aria-label="Open de visuele gids voor ${esc(stop.title)}"><div class="fallback"><b>${esc(stop.typeIcon)}</b><span>Open de visuele locatiegids</span></div><img alt="${esc(stop.title)}"${local?` src="${local}"`:""} loading="lazy">${local?"":`<a class="credit" target="_blank" rel="noopener">📷 Wikipedia / Wikimedia Commons</a>`}<span class="letter">${esc(stop.letter)}</span></div>`;
+  return `<div class="media${local?" loaded":""}" data-stop="${esc(stop.uid)}" data-wiki="${wiki}" role="button" tabindex="0" aria-label="Veeg door vijf foto's of open de visuele gids voor ${esc(stop.title)}">${carousel(stop,"card-carousel")}<span class="letter">${esc(stop.letter)}</span></div>`;
 }
 
 function stopCard(stop){
@@ -224,10 +237,16 @@ function classification(score){
   return "Gemengd gewaardeerd";
 }
 
+function photoSources(stop){
+  const sources=galleryFor(stop).filter(item=>item.source);
+  if(!sources.length) return "";
+  return `<details class="photo-sources"><summary>Fotobronnen van deze locatie</summary><ol>${sources.map((item,index)=>`<li><a href="${esc(item.source)}" target="_blank" rel="noopener">Foto ${index+2}</a>${item.credit?` · ${esc(item.credit)}`:""}${item.license?` · ${esc(item.license)}`:""}</li>`).join("")}</ol></details>`;
+}
+
 function openInfographic(uid){
   const stop=ALL_STOPS.find(item=>item.uid===uid);
   if(!stop) return;
-  const rating=ratingFor(stop), photo=photoFor(stop);
+  const rating=ratingFor(stop);
   const fallbackHistory=HISTORY[stop.title] || (stop.type.includes("Route") || stop.type.includes("Praktisch") || stop.type.includes("Start") || stop.type.includes("Eind") ? "Dit is vooral een praktisch routepunt in jullie planning. De waarde zit in de ligging en de logische aansluiting op de volgende stop." : "Deze locatie vertelt een eigen stukje van Berlijn. Gebruik de samenvatting en bezoektips hieronder om snel te bepalen waar jullie aandacht aan willen geven.");
   const guide=GUIDE_CONTENT[stop.title] || {
     intro:stop.summary,
@@ -237,8 +256,9 @@ function openInfographic(uid){
     layina:familyTip(stop),
     tip:stop.practical
   };
-  document.getElementById("infographic-root").innerHTML=`<div class="info-overlay" role="dialog" aria-modal="true" aria-labelledby="info-title"><article class="info-sheet"><button type="button" class="info-close" aria-label="Sluit de locatie-infographic">×</button><header class="info-hero">${photo?`<img src="${photo}" alt="${esc(stop.title)}">`:""}<div class="info-title"><span>${esc(stop.type)} · ${esc(stop.visit)}</span><h2 id="info-title">${esc(stop.title)}</h2></div></header><div class="info-body"><section class="score-card"><div class="score-number">${rating.score?rating.score.toFixed(1):"–"}</div><div><div class="rating-stars-wrap">${stars(rating.score)}</div><strong>${classification(rating.score)}</strong><small>${rating.score?"Tripadvisor-waardering · gecontroleerd 29 juli 2026":"Geen afzonderlijke score vastgezet; open Tripadvisor live"}</small></div><a href="${rating.url}" target="_blank" rel="noopener">Tripadvisor openen</a></section><div class="infographic-grid"><section class="info-block wide guide-lead"><div class="icon">🎙️</div><h3>De reisleider vertelt</h3>${paragraphs(guide.intro)}</section><section class="info-block wide story-block"><div class="icon">⌛</div><h3>Het verhaal van deze plek</h3>${paragraphs(guide.history)}</section><section class="info-block wide experience-block"><div class="icon">👀</div><h3>Wat jullie hier gaan ervaren</h3>${paragraphs(guide.experience)}<p><strong>In jullie planning:</strong> ${esc(stop.details)}</p></section><section class="info-block"><div class="icon">⏱</div><h3>Jullie bezoek</h3><p><strong>${esc(stop.visit)}</strong><br>${esc(stop.inside)}<br>Gepland: ${esc(stop.time)}</p></section><section class="info-block"><div class="icon">🧭</div><h3>Plaats in de route</h3><p>Stop ${esc(stop.letter)} op ${esc(stop.time)}. Google Maps bepaalt bij openen de route vanaf jullie actuele locatie.</p></section><section class="info-block wide accent-block"><div class="icon">🔎</div><h3>Hier moet je ter plekke op letten</h3>${paragraphs(guide.look)}</section><section class="info-block wide layina-story"><div class="icon">👧</div><h3>Zo kun je het aan Layina vertellen</h3>${paragraphs(guide.layina)}</section><section class="info-block wide guide-tip"><div class="icon">💡</div><h3>Tip van de reisleider</h3>${paragraphs(guide.tip)}<p><strong>Praktisch:</strong> ${esc(stop.practical)}</p><p>${esc(visitStrategy(stop))}</p></section><section class="info-block wide"><div class="icon">📍</div><h3>Adres en verder reizen</h3><p>${esc(stop.address)}</p><p>Tik onderaan op navigeren om Google Maps vanaf jullie actuele locatie te laten rekenen.</p></section></div><div class="info-actions"><a href="${navigateNow(stop.address)}" target="_blank" rel="noopener">➤ Navigeer vanaf mijn locatie</a>${stop.official?`<a href="${esc(stop.official)}" target="_blank" rel="noopener">Tickets / officiële website</a>`:`<a href="${mapsSearch(stop.address)}" target="_blank" rel="noopener">Open in Google Maps</a>`}</div></div></article></div>`;
+  document.getElementById("infographic-root").innerHTML=`<div class="info-overlay" role="dialog" aria-modal="true" aria-labelledby="info-title"><article class="info-sheet"><button type="button" class="info-close" aria-label="Sluit de locatie-infographic">×</button><header class="info-hero">${carousel(stop,"hero-carousel")}<div class="info-title"><span>${esc(stop.type)} · ${esc(stop.visit)}</span><h2 id="info-title">${esc(stop.title)}</h2></div></header><div class="info-body"><section class="score-card"><div class="score-number">${rating.score?rating.score.toFixed(1):"–"}</div><div><div class="rating-stars-wrap">${stars(rating.score)}</div><strong>${classification(rating.score)}</strong><small>${rating.score?"Tripadvisor-waardering · gecontroleerd 29 juli 2026":"Geen afzonderlijke score vastgezet; open Tripadvisor live"}</small></div><a href="${rating.url}" target="_blank" rel="noopener">Tripadvisor openen</a></section><div class="infographic-grid"><section class="info-block wide guide-lead"><div class="icon">🎙️</div><h3>De reisleider vertelt</h3>${paragraphs(guide.intro)}</section><section class="info-block wide story-block"><div class="icon">⌛</div><h3>Het verhaal van deze plek</h3>${paragraphs(guide.history)}</section><section class="info-block wide experience-block"><div class="icon">👀</div><h3>Wat jullie hier gaan ervaren</h3>${paragraphs(guide.experience)}<p><strong>In jullie planning:</strong> ${esc(stop.details)}</p></section><section class="info-block"><div class="icon">⏱</div><h3>Jullie bezoek</h3><p><strong>${esc(stop.visit)}</strong><br>${esc(stop.inside)}<br>Gepland: ${esc(stop.time)}</p></section><section class="info-block"><div class="icon">🧭</div><h3>Plaats in de route</h3><p>Stop ${esc(stop.letter)} op ${esc(stop.time)}. Google Maps bepaalt bij openen de route vanaf jullie actuele locatie.</p></section><section class="info-block wide accent-block"><div class="icon">🔎</div><h3>Hier moet je ter plekke op letten</h3>${paragraphs(guide.look)}</section><section class="info-block wide layina-story"><div class="icon">👧</div><h3>Zo kun je het aan Layina vertellen</h3>${paragraphs(guide.layina)}</section><section class="info-block wide guide-tip"><div class="icon">💡</div><h3>Tip van de reisleider</h3>${paragraphs(guide.tip)}<p><strong>Praktisch:</strong> ${esc(stop.practical)}</p><p>${esc(visitStrategy(stop))}</p></section><section class="info-block wide"><div class="icon">📍</div><h3>Adres en verder reizen</h3><p>${esc(stop.address)}</p><p>Tik onderaan op navigeren om Google Maps vanaf jullie actuele locatie te laten rekenen.</p></section></div>${photoSources(stop)}<div class="info-actions"><a href="${navigateNow(stop.address)}" target="_blank" rel="noopener">➤ Navigeer vanaf mijn locatie</a>${stop.official?`<a href="${esc(stop.official)}" target="_blank" rel="noopener">Tickets / officiële website</a>`:`<a href="${mapsSearch(stop.address)}" target="_blank" rel="noopener">Open in Google Maps</a>`}</div></div></article></div>`;
   document.body.classList.add("modal-open");
+  initializeCarousels(document.getElementById("infographic-root"));
   const closeButton=document.querySelector(".info-close");
   closeButton.addEventListener("click",event=>{event.preventDefault();event.stopPropagation();closeInfographic();},{once:true});
   try{closeButton.focus({preventScroll:true});}catch{closeButton.focus();}
@@ -265,12 +285,35 @@ async function loadMedia(element){
   }catch{}
 }
 
+function initializeCarousels(root=document){
+  root.querySelectorAll("[data-carousel]").forEach(carouselElement=>{
+    if(carouselElement.dataset.ready) return;
+    carouselElement.dataset.ready="true";
+    const track=carouselElement.querySelector(".photo-track");
+    const dots=[...carouselElement.querySelectorAll(".photo-dots span")];
+    const count=carouselElement.querySelector(".photo-count");
+    let frame=0, moved=false, startX=0, startScroll=0;
+    const update=()=>{
+      frame=0;
+      const index=Math.max(0,Math.min(dots.length-1,Math.round(track.scrollLeft/Math.max(1,track.clientWidth))));
+      dots.forEach((dot,dotIndex)=>dot.classList.toggle("active",dotIndex===index));
+      if(count) count.textContent=`${index+1} / ${dots.length}`;
+    };
+    track.addEventListener("scroll",()=>{if(!frame)frame=requestAnimationFrame(update);},{passive:true});
+    track.addEventListener("pointerdown",event=>{startX=event.clientX;startScroll=track.scrollLeft;moved=false;},{passive:true});
+    track.addEventListener("pointermove",event=>{if(Math.abs(event.clientX-startX)>8||Math.abs(track.scrollLeft-startScroll)>8)moved=true;},{passive:true});
+    track.addEventListener("click",event=>{if(moved){event.preventDefault();event.stopPropagation();moved=false;}},true);
+    update();
+  });
+}
+
 const ALL_STOPS=[];
 DAYS.forEach(day=>day.stops.forEach((stop,index)=>{stop.uid=`${day.id}-${index}`;ALL_STOPS.push(stop);}));
 
 function init(){
   document.getElementById("daynav").innerHTML=DAYS.map(day=>`<a href="#${day.id}"><b>${esc(day.short)}</b><small>${esc(day.date)}</small></a>`).join("")+`<a href="#tips"><b>☎</b><small>Tips</small></a>`;
   document.getElementById("app").innerHTML=DAYS.map(daySection).join("");
+  initializeCarousels();
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){loadMedia(entry.target);observer.unobserve(entry.target);}}),{rootMargin:"350px"});
   document.querySelectorAll(".media[data-wiki]").forEach(element=>observer.observe(element));
   document.addEventListener("click",event=>{
