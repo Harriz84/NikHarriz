@@ -310,9 +310,143 @@ function initializeCarousels(root=document){
 const ALL_STOPS=[];
 DAYS.forEach(day=>day.stops.forEach((stop,index)=>{stop.uid=`${day.id}-${index}`;ALL_STOPS.push(stop);}));
 
+const LOCATION_ALIASES={
+  ...RATING_ALIASES,
+  "Berlin Hauptbahnhof & vertrek":"Berlin Hauptbahnhof"
+};
+const HOTEL_ORIGIN={lat:52.51072,lng:13.37636,label:"Berlin Marriott Hotel"};
+const CHECKED_LOCATIONS_KEY="berlijn-2026-afgevinkte-locaties-v1";
+let distanceOrigin={...HOTEL_ORIGIN};
+
+const canonicalLocationTitle=title=>LOCATION_ALIASES[title]||title;
+const UNIQUE_LOCATIONS=[];
+const seenLocations=new Set();
+ALL_STOPS.forEach(stop=>{
+  const canonical=canonicalLocationTitle(stop.title);
+  if(seenLocations.has(canonical)) return;
+  seenLocations.add(canonical);
+  UNIQUE_LOCATIONS.push({...stop,canonicalTitle:canonical});
+});
+
+function locationCategory(stop){
+  const text=`${stop.canonicalTitle} ${stop.type} ${stop.inside}`.toLowerCase();
+  if(/hotel|station|aankomst|vertrek|startpunt|eindpunt|bagage|rustpunt/.test(text)) return "Praktisch";
+  if(/zoo|aquarium|kindermuseum|anoha|kind & dieren/.test(text)) return "Kind & dieren";
+  if(/food|markt|diner|lunch|café|restaurant|eten|burgermeister|neni/.test(text)) return "Eten & markten";
+  if(/museum|gedenk|monument|topographie|checkpoint|reichstag|dom|kerk|wall|schloss|kulturen/.test(text)) return "Historie & cultuur";
+  if(/park|wandeling|brug|platz|gelände|wijk|höfe|scheunen|buiten|museumeiland/.test(text)) return "Buiten & wijken";
+  return "Bezienswaardigheid";
+}
+
+function distanceKm(from,to){
+  const radians=value=>value*Math.PI/180;
+  const earthRadius=6371;
+  const latDelta=radians(to.lat-from.lat);
+  const lngDelta=radians(to.lng-from.lng);
+  const a=Math.sin(latDelta/2)**2+Math.cos(radians(from.lat))*Math.cos(radians(to.lat))*Math.sin(lngDelta/2)**2;
+  return 2*earthRadius*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+
+function readCheckedLocations(){
+  try{
+    const parsed=JSON.parse(localStorage.getItem(CHECKED_LOCATIONS_KEY)||"[]");
+    return new Set(Array.isArray(parsed)?parsed:[]);
+  }catch{return new Set();}
+}
+
+function saveCheckedLocations(checked){
+  try{localStorage.setItem(CHECKED_LOCATIONS_KEY,JSON.stringify([...checked]));}catch{}
+}
+
+function locationFilterMarkup(){
+  const categories=[...new Set(UNIQUE_LOCATIONS.map(locationCategory))].sort((a,b)=>a.localeCompare(b,"nl"));
+  return `<div class="location-filter-head"><span>Zelf kiezen en bijhouden</span><h2>Alle locaties</h2><p>Filter de reis op waardering, afstand en soort plek. Afgevinkte locaties blijven op dit apparaat bewaard.</p></div><div class="filter-grid"><label>Tripadvisor-score<select id="location-score-filter"><option value="0">Alle scores</option><option value="4">4,0 sterren of hoger</option><option value="4.3">4,3 sterren of hoger</option><option value="4.5">4,5 sterren of hoger</option><option value="unrated">Zonder vaste score</option></select></label><label>Afstand<select id="location-distance-filter"><option value="all">Alle afstanden</option><option value="1">Tot 1 km</option><option value="3">Tot 3 km</option><option value="5">Tot 5 km</option><option value="10">Tot 10 km</option></select></label><label>Type locatie<select id="location-type-filter"><option value="all">Alle typen</option>${categories.map(category=>`<option value="${esc(category)}">${esc(category)}</option>`).join("")}</select></label><label>Sorteren<select id="location-sort"><option value="route">Reisvolgorde</option><option value="distance">Dichtstbij eerst</option><option value="score">Hoogste score eerst</option><option value="name">Naam A–Z</option></select></label></div><div class="location-origin"><div><strong id="location-origin-label">Afstand vanaf het hotel</strong><small>Gebruik je locatie voor afstanden vanaf waar je nu bent.</small></div><button type="button" id="use-current-location">◎ Gebruik mijn huidige locatie</button></div><div class="location-results-bar"><strong id="location-result-count"></strong><button type="button" id="clear-checked-locations">Wis vinkjes</button></div><div id="location-results" class="location-results"></div>`;
+}
+
+function locationResultCard(stop,distance,checked){
+  const rating=ratingFor({...stop,title:stop.canonicalTitle});
+  const image=galleryFor(stop)[0];
+  const category=locationCategory(stop);
+  const distanceLabel=distance<1?`${Math.round(distance*1000)} m`:`${distance.toFixed(1).replace(".",",")} km`;
+  return `<article class="location-result${checked?" is-checked":""}" data-location-name="${esc(stop.canonicalTitle)}"><button type="button" class="location-result-photo" data-open-info="${esc(stop.uid)}" aria-label="Open de visuele gids voor ${esc(stop.canonicalTitle)}">${image?`<img src="${esc(image.src)}" alt="${esc(stop.canonicalTitle)}" loading="lazy" decoding="async">`:`<span>${esc(stop.typeIcon)}</span>`}</button><div class="location-result-copy"><div class="location-result-top"><span>${esc(category)}</span><span>📍 ${distanceLabel}</span></div><h3>${esc(stop.canonicalTitle)}</h3><div class="location-result-rating">${stars(rating.score)} <strong>${rating.score?rating.score.toFixed(1):"–"}</strong></div><p>${esc(stop.summary)}</p><div class="location-result-actions"><a href="${navigateNow(stop.address)}" target="_blank" rel="noopener">➤ Navigeer</a><a href="${rating.url}" target="_blank" rel="noopener">★ Tripadvisor</a><button type="button" data-open-info="${esc(stop.uid)}">▦ Infographic</button></div></div><label class="location-check"><input type="checkbox" data-complete-location="${esc(stop.canonicalTitle)}"${checked?" checked":""}><span aria-hidden="true">✓</span><b>${checked?"Gedaan":"Afvinken"}</b></label></article>`;
+}
+
+function updateLocationResults(){
+  const root=document.getElementById("locations");
+  if(!root) return;
+  const scoreValue=document.getElementById("location-score-filter").value;
+  const distanceValue=document.getElementById("location-distance-filter").value;
+  const typeValue=document.getElementById("location-type-filter").value;
+  const sortValue=document.getElementById("location-sort").value;
+  const checked=readCheckedLocations();
+  let locations=UNIQUE_LOCATIONS.map((stop,index)=>({
+    stop,
+    index,
+    rating:ratingFor({...stop,title:stop.canonicalTitle}).score,
+    distance:distanceKm(distanceOrigin,stop)
+  }));
+  locations=locations.filter(item=>{
+    const scoreMatch=scoreValue==="0"?true:scoreValue==="unrated"?!item.rating:item.rating!==null&&item.rating>=Number(scoreValue);
+    const distanceMatch=distanceValue==="all"||item.distance<=Number(distanceValue);
+    const typeMatch=typeValue==="all"||locationCategory(item.stop)===typeValue;
+    return scoreMatch&&distanceMatch&&typeMatch;
+  });
+  locations.sort((a,b)=>{
+    if(sortValue==="distance") return a.distance-b.distance;
+    if(sortValue==="score") return (b.rating||-1)-(a.rating||-1)||a.index-b.index;
+    if(sortValue==="name") return a.stop.canonicalTitle.localeCompare(b.stop.canonicalTitle,"nl");
+    return a.index-b.index;
+  });
+  const completed=UNIQUE_LOCATIONS.filter(stop=>checked.has(stop.canonicalTitle)).length;
+  document.getElementById("location-result-count").textContent=`${locations.length} locaties zichtbaar · ${completed} van ${UNIQUE_LOCATIONS.length} afgevinkt`;
+  document.getElementById("location-results").innerHTML=locations.length?locations.map(item=>locationResultCard(item.stop,item.distance,checked.has(item.stop.canonicalTitle))).join(""):`<div class="no-location-results"><b>Geen locaties gevonden</b><span>Maak één van de filters ruimer.</span></div>`;
+}
+
+function initLocationExplorer(){
+  const root=document.getElementById("locations");
+  if(!root) return;
+  root.innerHTML=locationFilterMarkup();
+  root.querySelectorAll("select").forEach(select=>select.addEventListener("change",updateLocationResults));
+  root.addEventListener("change",event=>{
+    const checkbox=event.target.closest("[data-complete-location]");
+    if(!checkbox) return;
+    const checked=readCheckedLocations();
+    if(checkbox.checked) checked.add(checkbox.dataset.completeLocation);
+    else checked.delete(checkbox.dataset.completeLocation);
+    saveCheckedLocations(checked);
+    updateLocationResults();
+  });
+  document.getElementById("clear-checked-locations").addEventListener("click",()=>{
+    saveCheckedLocations(new Set());
+    updateLocationResults();
+  });
+  document.getElementById("use-current-location").addEventListener("click",()=>{
+    const button=document.getElementById("use-current-location");
+    const label=document.getElementById("location-origin-label");
+    if(!navigator.geolocation){
+      label.textContent="Locatiebepaling wordt niet ondersteund";
+      return;
+    }
+    button.disabled=true;
+    button.textContent="Locatie bepalen…";
+    navigator.geolocation.getCurrentPosition(position=>{
+      distanceOrigin={lat:position.coords.latitude,lng:position.coords.longitude,label:"huidige locatie"};
+      label.textContent="Afstand vanaf je huidige locatie";
+      button.textContent="✓ Huidige locatie actief";
+      updateLocationResults();
+    },()=>{
+      label.textContent="Locatie niet gedeeld · afstand vanaf het hotel";
+      button.disabled=false;
+      button.textContent="◎ Opnieuw proberen";
+    },{enableHighAccuracy:true,timeout:10000,maximumAge:300000});
+  });
+  updateLocationResults();
+}
+
 function init(){
-  document.getElementById("daynav").innerHTML=DAYS.map(day=>`<a href="#${day.id}"><b>${esc(day.short)}</b><small>${esc(day.date)}</small></a>`).join("")+`<a href="#tips"><b>☎</b><small>Tips</small></a>`;
+  document.getElementById("daynav").innerHTML=DAYS.map(day=>`<a href="#${day.id}"><b>${esc(day.short)}</b><small>${esc(day.date)}</small></a>`).join("")+`<a href="#locations"><b>⌕</b><small>Locaties</small></a><a href="#tips"><b>☎</b><small>Tips</small></a>`;
   document.getElementById("app").innerHTML=DAYS.map(daySection).join("");
+  initLocationExplorer();
   initializeCarousels();
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){loadMedia(entry.target);observer.unobserve(entry.target);}}),{rootMargin:"350px"});
   document.querySelectorAll(".media[data-wiki]").forEach(element=>observer.observe(element));
