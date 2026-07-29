@@ -119,32 +119,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Berlin_-_Potsdamer_Platz_-_2016.jpg/1280px-Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "alt": "Berlin Marriott Hotel – Aerial view of Potsdamer Platz, Berlin 2016",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "credit": "Avda",
-      "license": "CC BY-SA 3.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-exterior-0147-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Buitenaanzicht van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg/1280px-Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg",
-      "alt": "Berlin Marriott Hotel – Potsdamer Platz , Berlin-Mitte with the following buildings (from left to right): Office building by Renzo Piano, Kollhoff-Tower (by Hans Kollhoff), Bahntower by Helmut Jahn, Beisheim Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_151024,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-atrium-0036-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Atrium en lobby van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg/1280px-Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg",
-      "alt": "Berlin Marriott Hotel – Detail of the Kollhoff-Tower (left) in front of Bahntower (right) at Potzdamer Platz, Berlin, Germany on a summer morning.",
-      "source": "https://commons.wikimedia.org/wiki/File:Detail,_Kollhoff_Tower_and_BahnTower,_Potsdamer_Platz,_Berlin,_Germany-3380.jpg",
-      "credit": "Slaunger",
-      "license": "CC BY-SA 4.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-double-room-6003-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Gastenkamer in het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Potsdamer_Platz_2015_03.jpg/1280px-Potsdamer_Platz_2015_03.jpg",
-      "alt": "Berlin Marriott Hotel – Buildings at the Potsdamer Platz as of May 2015.",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz_2015_03.jpg",
-      "credit": "Perituss",
-      "license": "CC0"
+      "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-bermc-bermc-pool-area-20720:Wide-Hor?wid=1280&fit=constrain",
+      "alt": "Berlin Marriott Hotel – Zwembad van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Potsdamer Platz & hotelomgeving": [
@@ -267,32 +267,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Budapester_Stra%C3%9Fe_Berlin_02.jpg/1280px-Budapester_Stra%C3%9Fe_Berlin_02.jpg",
-      "alt": "Aquarium Berlin – Blick auf die Budapester Straße in Berlin-Charlottenburg Richtung Aquarium und Elefantentor",
-      "source": "https://commons.wikimedia.org/wiki/File:Budapester_Stra%C3%9Fe_Berlin_02.jpg",
-      "credit": "Geoprofi Lars",
-      "license": "CC BY-SA 4.0"
+      "src": "https://www.aquarium-berlin.de/fileadmin/_processed_/e/d/csm_header_feuerfisch_e077458390.jpg",
+      "alt": "Aquarium Berlin – Kleurrijke koraalduivel in Aquarium Berlin",
+      "source": "https://www.aquarium-berlin.de/en/animals/life-under-water",
+      "credit": "Aquarium Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/1987-06-07_Berlin-Charlottenburg_Budapester_Stra%C3%9Fe_c.jpg/1280px-1987-06-07_Berlin-Charlottenburg_Budapester_Stra%C3%9Fe_c.jpg",
-      "alt": "Aquarium Berlin – Berlin-Charlottenburg (West Berlin). View north toward the Zoo Aquarium.",
-      "source": "https://commons.wikimedia.org/wiki/File:1987-06-07_Berlin-Charlottenburg_Budapester_Stra%C3%9Fe_c.jpg",
-      "credit": "Lothar Weber",
-      "license": "CC BY-SA 4.0"
+      "src": "https://www.aquarium-berlin.de/fileadmin/_processed_/e/c/csm_Grosses_Korallenbecken_16_9_d73ef57f66.jpg",
+      "alt": "Aquarium Berlin – Het grote koraalbekken van Aquarium Berlin",
+      "source": "https://www.aquarium-berlin.de/en/animals/life-under-water",
+      "credit": "Aquarium Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Berlin_GTafel_KHeinroth.jpg",
-      "alt": "Aquarium Berlin – Berlin memorial plaque for Katharina Heinroth in Berlin - Tiergarten , Germany",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_GTafel_KHeinroth.jpg",
-      "credit": "Doris Antony , Berlin",
-      "license": "CC BY-SA 3.0"
+      "src": "https://www.aquarium-berlin.de/fileadmin/_processed_/8/c/csm_Schwarzspitzenriffhaie_14_77197a18f8.jpg",
+      "alt": "Aquarium Berlin – Zwartpuntrifhaaien in Aquarium Berlin",
+      "source": "https://www.aquarium-berlin.de/en/animals/life-under-water",
+      "credit": "Aquarium Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Berlin_GTafel_OHeinroth.jpg/1280px-Berlin_GTafel_OHeinroth.jpg",
-      "alt": "Aquarium Berlin – Berlin memorial plaque for Oskar Heinroth in Berlin - Tiergarten , Germany",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_GTafel_OHeinroth.jpg",
-      "credit": "Doris Antony , Berlin",
-      "license": "CC BY-SA 3.0"
+      "src": "https://www.aquarium-berlin.de/fileadmin/_processed_/4/3/csm_teaser_qualle_b0084745ff.jpg",
+      "alt": "Aquarium Berlin – Kwal in Aquarium Berlin",
+      "source": "https://www.aquarium-berlin.de/en/animals/life-under-water",
+      "credit": "Aquarium Berlin",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Kaiser-Wilhelm-Gedächtniskirche": [
@@ -378,32 +378,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Bikini_Berlin_Stra%C3%9Fenansicht_2014.jpg/1280px-Bikini_Berlin_Stra%C3%9Fenansicht_2014.jpg",
-      "alt": "NENI Berlin – Die Straßenansicht des Bikini Berlin am Tag der Eröffnung.",
-      "source": "https://commons.wikimedia.org/wiki/File:Bikini_Berlin_Stra%C3%9Fenansicht_2014.jpg",
-      "credit": "indeedous",
-      "license": "Attribution"
+      "src": "https://25hours-hotels.com/wp-content/uploads/sites/39/2024/09/25h_bikiniberlin_neni_header.jpg",
+      "alt": "NENI Berlin – Interieur en uitzicht van NENI Berlin",
+      "source": "https://25hours-hotels.com/berlin/bikini-berlin/restaurants-and-bars/neni-berlin/",
+      "credit": "25hours Hotel Bikini Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Charlottenburg_Blick_zum_Bikini-Haus.jpg/1280px-Charlottenburg_Blick_zum_Bikini-Haus.jpg",
-      "alt": "NENI Berlin – Charlottenburg Blick zum Bikini-Haus mit Gedächtniskirche, Berlin Upper-West und Waldorf-Astoria",
-      "source": "https://commons.wikimedia.org/wiki/File:Charlottenburg_Blick_zum_Bikini-Haus.jpg",
-      "credit": "Fridolin freudenfett",
-      "license": "CC BY-SA 4.0"
+      "src": "https://25hours-hotels.com/wp-content/uploads/sites/39/2024/09/25h_bikiniberlin_neni_menu_2.jpg",
+      "alt": "NENI Berlin – Gerechten om te delen bij NENI Berlin",
+      "source": "https://25hours-hotels.com/berlin/bikini-berlin/restaurants-and-bars/neni-berlin/",
+      "credit": "25hours Hotel Bikini Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Bikini-Haus%2C_2024_%2801%29.jpg/1280px-Bikini-Haus%2C_2024_%2801%29.jpg",
-      "alt": "NENI Berlin – View of the main sign at Bikini-Haus, Berlin-Charlottenburg",
-      "source": "https://commons.wikimedia.org/wiki/File:Bikini-Haus,_2024_(01).jpg",
-      "credit": "Bahnfrend",
-      "license": "CC BY-SA 4.0"
+      "src": "https://25hours-hotels.com/wp-content/uploads/sites/39/2024/09/25h_bikiniberlin_neni_findus.jpg",
+      "alt": "NENI Berlin – Sfeer en tafels bij NENI Berlin",
+      "source": "https://25hours-hotels.com/berlin/bikini-berlin/restaurants-and-bars/neni-berlin/",
+      "credit": "25hours Hotel Bikini Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Blick_vom_Bikini_Berlin_zum_Hochhaus_Upper_West_%282022%29.jpg/1280px-Blick_vom_Bikini_Berlin_zum_Hochhaus_Upper_West_%282022%29.jpg",
-      "alt": "NENI Berlin – Bikini Berlin and high rise \"Upper West\"",
-      "source": "https://commons.wikimedia.org/wiki/File:Blick_vom_Bikini_Berlin_zum_Hochhaus_Upper_West_(2022).jpg",
-      "credit": "JoachimKohler-HB",
-      "license": "CC BY-SA 4.0"
+      "src": "https://25hours-hotels.com/wp-content/uploads/sites/39/2024/09/25h_bikiniberlin_neni_featuredimage.jpg",
+      "alt": "NENI Berlin – NENI Berlin boven de stad",
+      "source": "https://25hours-hotels.com/berlin/bikini-berlin/restaurants-and-bars/neni-berlin/",
+      "credit": "25hours Hotel Bikini Berlin",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "ANOHA Kindermuseum": [
@@ -452,32 +452,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "assets/photos/the-wall-museum.jpg",
-      "alt": "Logo van The Wall Museum",
-      "source": "https://thewallmuseum.com/",
-      "credit": "Officiële locatie-uiting",
-      "license": ""
+      "src": "https://thewallmuseum.com/wp-content/uploads/2018/04/exhibit_1.jpg",
+      "alt": "The Wall Museum – Multimediale tentoonstelling in The Wall Museum",
+      "source": "https://thewallmuseum.com/en/exhibition/",
+      "credit": "The Wall Museum",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Berlin_Wall_near_East_Side_Gallery.JPG/1280px-Berlin_Wall_near_East_Side_Gallery.JPG",
-      "alt": "The Wall Museum – Berlin Wall near East Side Gallery",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_Wall_near_East_Side_Gallery.JPG",
-      "credit": "Pudelek (Marcin Szala)",
-      "license": "CC BY-SA 3.0"
+      "src": "https://thewallmuseum.com/wp-content/uploads/2018/04/the-wall-museum-mauerbau.jpg",
+      "alt": "The Wall Museum – Tentoonstellingszaal over de bouw van de Muur",
+      "source": "https://thewallmuseum.com/en/exhibition/",
+      "credit": "The Wall Museum",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/East_side_gallery%2C_Berlin_Wall_%28Ank_Kumar%2C_Infosys_Limited_%29_07.jpg/1280px-East_side_gallery%2C_Berlin_Wall_%28Ank_Kumar%2C_Infosys_Limited_%29_07.jpg",
-      "alt": "The Wall Museum – East side gallery, Berlin Wall (Ank Kumar, Infosys Limited)",
-      "source": "https://commons.wikimedia.org/wiki/File:East_side_gallery,_Berlin_Wall_(Ank_Kumar,_Infosys_Limited_)_07.jpg",
-      "credit": "Ank Kumar",
-      "license": "CC BY-SA 4.0"
+      "src": "https://thewallmuseum.com/wp-content/uploads/2018/04/ausstellung.jpg",
+      "alt": "The Wall Museum – Historische presentatie in The Wall Museum",
+      "source": "https://thewallmuseum.com/en/exhibition/",
+      "credit": "The Wall Museum",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Berlin%2C_Oberbaumbr%C3%BCcke_--_2011_--_2282.jpg/1280px-Berlin%2C_Oberbaumbr%C3%BCcke_--_2011_--_2282.jpg",
-      "alt": "The Wall Museum – This is a picture of the Berliner Kulturdenkmal ( cultural monument ) with the ID",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin,_Oberbaumbr%C3%BCcke_--_2011_--_2282.jpg",
-      "credit": "Dietmar Rabich",
-      "license": "CC BY-SA 4.0"
+      "src": "https://thewallmuseum.com/wp-content/uploads/2018/04/wall-museum-visitor.jpg",
+      "alt": "The Wall Museum – Bezoekers in The Wall Museum",
+      "source": "https://thewallmuseum.com/en/schools/",
+      "credit": "The Wall Museum",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Oberbaumbrücke": [
@@ -711,32 +711,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Burgermeister-Schlesisches-Tor.jpg",
-      "alt": "Burgermeister Potsdamer Platz – Burgermeister-Schlesisches-Tor",
-      "source": "https://commons.wikimedia.org/wiki/File:Burgermeister-Schlesisches-Tor.jpg",
-      "credit": "Burgermeister Berlin",
-      "license": "CC BY-SA 4.0"
+      "src": "https://burgermeister.com/upload/2025/09/Burgermeister_Standorte_Potsdamer-Platz_de.jpg",
+      "alt": "Burgermeister Potsdamer Platz – Burgermeister-vestiging aan Potsdamer Platz",
+      "source": "https://burgermeister.com/locations/?lang=en",
+      "credit": "Burgermeister",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Schlesisches_Tor_November_2013_01.jpg/1280px-Schlesisches_Tor_November_2013_01.jpg",
-      "alt": "Burgermeister Potsdamer Platz – U-bahn viaduct next to Schlesisches Tor station, Berlin Kreutzberg. Below fast food restaurant Burgermeister.",
-      "source": "https://commons.wikimedia.org/wiki/File:Schlesisches_Tor_November_2013_01.jpg",
-      "credit": "Arild Vågen",
-      "license": "CC BY-SA 3.0"
+      "src": "https://burgermeister.com/upload/2025/08/BURGERMEISTER-MENU-2-CHEESEBURGER.jpg",
+      "alt": "Burgermeister Potsdamer Platz – Cheeseburger van Burgermeister",
+      "source": "https://burgermeister.com/menu/?lang=en%2F",
+      "credit": "Burgermeister",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Potsdamer_Platz%2C_Berlin%2C_160606%2C_ako_%281%29.jpg/1280px-Potsdamer_Platz%2C_Berlin%2C_160606%2C_ako_%281%29.jpg",
-      "alt": "Burgermeister Potsdamer Platz – Skyscapers at Potsdamer Platz, Berlin at the end of the blue hour. Buildings and their architects from left to right: Atrium-Tower (Renzo Piano), Kollhoff-Tower (Hans Kollhoff), BahnTower (Helmut Jahn), Beisheim-Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_160606,_ako_(1).jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 4.0"
+      "src": "https://burgermeister.com/upload/2025/08/BURGERMEISTER-MENU-5-MEISTERBURGER.jpg",
+      "alt": "Burgermeister Potsdamer Platz – Meisterburger van Burgermeister",
+      "source": "https://burgermeister.com/menu/?lang=en%2F",
+      "credit": "Burgermeister",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Potsdamer-Platz-Hochhaeuser-2015.jpg/1280px-Potsdamer-Platz-Hochhaeuser-2015.jpg",
-      "alt": "Burgermeister Potsdamer Platz – High-rises at Potsdamer Platz in Berlin in backlight: Kollhoff-Tower , Forum Tower and Bahntower (from left)",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer-Platz-Hochhaeuser-2015.jpg",
-      "credit": "Tuxyso",
-      "license": "CC BY-SA 3.0"
+      "src": "https://burgermeister.com/upload/2024/04/Burgermeister-Cheese-Fries-1.png",
+      "alt": "Burgermeister Potsdamer Platz – Cheese fries van Burgermeister",
+      "source": "https://burgermeister.com/menu/?lang=en%2F",
+      "credit": "Burgermeister",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Topographie des Terrors": [
@@ -822,6 +822,13 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
+      "src": "https://panoramapunkt.de/wp-content/uploads/2022/09/berlin-highlights-7.jpg",
+      "alt": "Panorama Punkt – Uitzicht over Berlijn vanaf Panorama Punkt",
+      "source": "https://panoramapunkt.de/en/view/",
+      "credit": "Panorama Punkt Berlin",
+      "license": "Foto via officiële locatiepagina"
+    },
+    {
       "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg/1280px-Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg",
       "alt": "Panorama Punkt – Detail of the Kollhoff-Tower (left) in front of Bahntower (right) at Potzdamer Platz, Berlin, Germany on a summer morning.",
       "source": "https://commons.wikimedia.org/wiki/File:Detail,_Kollhoff_Tower_and_BahnTower,_Potsdamer_Platz,_Berlin,_Germany-3380.jpg",
@@ -841,13 +848,6 @@ window.BERLIN_GALLERIES = {
       "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_160606,_ako_(1).jpg",
       "credit": "Ansgar Koreng",
       "license": "CC BY-SA 4.0"
-    },
-    {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Potsdamer_Platz%2C_Berlin-Mitte%2C_151024%2C_ako.jpg/1280px-Potsdamer_Platz%2C_Berlin-Mitte%2C_151024%2C_ako.jpg",
-      "alt": "Panorama Punkt – Potsdamer Platz , Berlin-Mitte with the following buildings (from left to right): Office building by Renzo Piano, Kollhoff-Tower (by Hans Kollhoff), Bahntower by Helmut Jahn, Beisheim Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin-Mitte,_151024,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
     }
   ],
   "Holocaustmonument": [
@@ -977,13 +977,6 @@ window.BERLIN_GALLERIES = {
       "license": "CC BY-SA 4.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sonnenuntergang_an_der_Spree%2C_Berlin%2C_1705252054%2C_ako.jpg/1280px-Sonnenuntergang_an_der_Spree%2C_Berlin%2C_1705252054%2C_ako.jpg",
-      "alt": "Zicht op Molecule Man & Badeschiff – Sunset at river Spree in Berlin-Friedrichshain. View from bridge \"Elsenbrücke\" towards bridge \"Oberbaumbrücke\". On the left side some buildings of the so called \"Treptowers\" complex can be seen. Next to them in the river there's the so called \"Molecule man\".",
-      "source": "https://commons.wikimedia.org/wiki/File:Sonnenuntergang_an_der_Spree,_Berlin,_1705252054,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 4.0"
-    },
-    {
       "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Molecule_Man_in_Berlin.jpg/1280px-Molecule_Man_in_Berlin.jpg",
       "alt": "Zicht op Molecule Man & Badeschiff – Molecule Man in Berlin, an den Treptowers 1, in the River Spree. In the Background you can see The TV Tower and the Oberbaum-Bridge.",
       "source": "https://commons.wikimedia.org/wiki/File:Molecule_Man_in_Berlin.jpg",
@@ -991,11 +984,18 @@ window.BERLIN_GALLERIES = {
       "license": "CC BY-SA 4.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Berlin_-_Molecule_Man_%282%29.jpg/1280px-Berlin_-_Molecule_Man_%282%29.jpg",
-      "alt": "Zicht op Molecule Man & Badeschiff – Alt-Treptow. An den Treptowers Molecule Man Jonathan Borofsky 1999",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_Molecule_Man_(2).jpg",
-      "credit": "Fred Romero from Paris, France",
-      "license": "CC BY 2.0"
+      "src": "https://en.arena.berlin/wp-content/uploads/2015/05/Slider_BS5_klein-1-1.jpg",
+      "alt": "Zicht op Molecule Man & Badeschiff – Badeschiff in de Spree tijdens de avondschemering",
+      "source": "https://en.arena.berlin/venue/badeschiff/",
+      "credit": "Arena Berlin",
+      "license": "Foto via officiële locatiepagina"
+    },
+    {
+      "src": "https://en.arena.berlin/wp-content/uploads/2015/05/Sommer-06-Badeschiff-Thorsten-Seidel-013.jpg",
+      "alt": "Zicht op Molecule Man & Badeschiff – Zwemmers in het Badeschiff met uitzicht over de Spree",
+      "source": "https://en.arena.berlin/venue/badeschiff/",
+      "credit": "Arena Berlin / Thorsten Seidel",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "RAW-Gelände": [
@@ -1081,32 +1081,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/140810_Berlin_Mauerpark.jpg/1280px-140810_Berlin_Mauerpark.jpg",
-      "alt": "Mauerpark markt & karaoke – Mauerpark in Berlin, facing south.",
-      "source": "https://commons.wikimedia.org/wiki/File:140810_Berlin_Mauerpark.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
+      "src": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mauerpark-karaoke-amphitheater-2011.jpg?width=1280",
+      "alt": "Mauerpark markt & karaoke – Bearpit Karaoke in het amfitheater van Mauerpark",
+      "source": "https://commons.wikimedia.org/wiki/File:Mauerpark-karaoke-amphitheater-2011.jpg",
+      "credit": "Alexander Puell",
+      "license": "CC BY 3.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Mauerpark_1979.jpg/1280px-Mauerpark_1979.jpg",
-      "alt": "Mauerpark markt & karaoke – Mauerpark, 31.03.2007",
-      "source": "https://commons.wikimedia.org/wiki/File:Mauerpark_1979.jpg",
-      "credit": "Franz Richter ( User:FRZ )",
+      "src": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Berlin-Mauerpark-Flohmarkt%20%283%29.jpg?width=1280",
+      "alt": "Mauerpark markt & karaoke – Vlooienmarkt in Mauerpark",
+      "source": "https://commons.wikimedia.org/wiki/File:Berlin-Mauerpark-Flohmarkt_(3).jpg",
+      "credit": "Ji-Elle",
       "license": "CC BY-SA 3.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/05.2020_Mauerpark_Berlin_Panorama.jpg/1280px-05.2020_Mauerpark_Berlin_Panorama.jpg",
-      "alt": "Mauerpark markt & karaoke – Mauerpark in Berlin im Mai 2020",
-      "source": "https://commons.wikimedia.org/wiki/File:05.2020_Mauerpark_Berlin_Panorama.jpg",
-      "credit": "Traktorminze",
-      "license": "CC BY-SA 4.0"
+      "src": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Fleamarket%20at%20Mauerpark%2C%20Berlin%2C%20Germany%20%28Unsplash%20llTMRNKHMFk%29.jpg?width=1280",
+      "alt": "Mauerpark markt & karaoke – Kramen en bezoekers op de Mauerpark-vlooienmarkt",
+      "source": "https://commons.wikimedia.org/wiki/File:Fleamarket_at_Mauerpark,_Berlin,_Germany_(Unsplash_llTMRNKHMFk).jpg",
+      "credit": "Unsplash-bijdrage via Wikimedia Commons",
+      "license": "Vrij herbruikbaar via Wikimedia Commons"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Berlin_Mauerpark_2022.jpg/1280px-Berlin_Mauerpark_2022.jpg",
-      "alt": "Mauerpark markt & karaoke – Berlin Mauerpark 2022.",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_Mauerpark_2022.jpg",
-      "credit": "Traktorminze",
-      "license": "CC BY 3.0"
+      "src": "https://commons.wikimedia.org/wiki/Special:Redirect/file/BearpitKaraoke.jpg?width=1280",
+      "alt": "Mauerpark markt & karaoke – Publiek bij Bearpit Karaoke in Mauerpark",
+      "source": "https://commons.wikimedia.org/wiki/File:BearpitKaraoke.jpg",
+      "credit": "Wikimedia Commons-bijdrager",
+      "license": "Creative Commons"
     }
   ],
   "Gedenkstätte Berliner Mauer – Bernauer Straße": [
@@ -1158,28 +1158,28 @@ window.BERLIN_GALLERIES = {
       "src": "https://beachmitte.de/wp-content/uploads/2024/06/2024-00100747-BeachMitte-Events-Kopie.webp",
       "alt": "BeachMitte – Strand en buitenruimte van BeachMitte",
       "source": "https://beachmitte.de/beachmitte/strandleben/",
-      "credit": "BeachMitte",
+      "credit": "Officiële locatiegalerij",
       "license": "Foto via officiële locatiepagina"
     },
     {
       "src": "https://beachmitte.de/wp-content/uploads/2024/06/bme_sl_gl_27.webp",
       "alt": "BeachMitte – Activiteiten op het zand van BeachMitte",
       "source": "https://beachmitte.de/beachmitte/strandleben/",
-      "credit": "BeachMitte",
+      "credit": "Officiële locatiegalerij",
       "license": "Foto via officiële locatiepagina"
     },
     {
       "src": "https://beachmitte.de/wp-content/uploads/2024/06/2024-00100405-BeachMitte-Events-Kopie.webp",
       "alt": "BeachMitte – Strandsfeer bij BeachMitte",
       "source": "https://beachmitte.de/beachmitte/strandleben/",
-      "credit": "BeachMitte",
+      "credit": "Officiële locatiegalerij",
       "license": "Foto via officiële locatiepagina"
     },
     {
       "src": "https://beachmitte.de/wp-content/uploads/2024/06/bme_sl_gl_15.webp",
       "alt": "BeachMitte – Lounge en speelruimte van BeachMitte",
       "source": "https://beachmitte.de/beachmitte/strandleben/",
-      "credit": "BeachMitte",
+      "credit": "Officiële locatiegalerij",
       "license": "Foto via officiële locatiepagina"
     }
   ],
@@ -1414,32 +1414,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Spandauer_Vorstadt_Dusableau_1723.jpg",
-      "alt": "Scheunenviertel / Spandauer Vorstadt – Die Königl. Residenz Berlin, wie selbige sich um das Jahr 1723 präsentiret : nach dem von G. Dusableau gezeichneten Plan verfertigt",
-      "source": "https://commons.wikimedia.org/wiki/File:Spandauer_Vorstadt_Dusableau_1723.jpg",
-      "credit": "Die Königl. Residenz Berlin, wie selbige sich um das Jahr 1723 präsentiret : nach dem von G. Dusableau gezeichneten Plan verfertigt",
-      "license": "Public domain"
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Berlin_Rosenthaler_Strasse_dk1303.jpg/1280px-Berlin_Rosenthaler_Strasse_dk1303.jpg",
+      "alt": "Scheunenviertel / Spandauer Vorstadt – Berlin, Blick vom Hackeschen Markt in die Rosenthaler Straße",
+      "source": "https://commons.wikimedia.org/wiki/File:Berlin_Rosenthaler_Strasse_dk1303.jpg",
+      "credit": "DrKssn",
+      "license": "CC BY-SA 3.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Spandauer_Vorstadt_-_New_Synagogue_-_20190806113439.jpeg/1280px-Spandauer_Vorstadt_-_New_Synagogue_-_20190806113439.jpeg",
-      "alt": "Scheunenviertel / Spandauer Vorstadt – Spandauer Vorstadt, New Synagogue.",
-      "source": "https://commons.wikimedia.org/wiki/File:Spandauer_Vorstadt_-_New_Synagogue_-_20190806113439.jpeg",
-      "credit": "Nicoladuesseldorf",
-      "license": "CC BY-SA 4.0"
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Berlin-Mitte%2C_Rosenthaler_Stra%C3%9Fe.JPG/1280px-Berlin-Mitte%2C_Rosenthaler_Stra%C3%9Fe.JPG",
+      "alt": "Scheunenviertel / Spandauer Vorstadt – Berlin-Mitte, the street \"Rosenthaler Straße\"",
+      "source": "https://commons.wikimedia.org/wiki/File:Berlin-Mitte,_Rosenthaler_Stra%C3%9Fe.JPG",
+      "credit": "Dguendel",
+      "license": "CC BY 3.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Spandauer_Vorstadt_-_New_Synagogue_-_20190806104309.jpeg/1280px-Spandauer_Vorstadt_-_New_Synagogue_-_20190806104309.jpeg",
-      "alt": "Scheunenviertel / Spandauer Vorstadt – Spandauer Vorstadt, New Synagogue.",
-      "source": "https://commons.wikimedia.org/wiki/File:Spandauer_Vorstadt_-_New_Synagogue_-_20190806104309.jpeg",
-      "credit": "Nicoladuesseldorf",
-      "license": "CC BY-SA 4.0"
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Rosenthaler_Strasse_Berlin.jpg/1280px-Rosenthaler_Strasse_Berlin.jpg",
+      "alt": "Scheunenviertel / Spandauer Vorstadt – Rosenthaler Strasse in Berlin. View from from a window of Easy Hotel.",
+      "source": "https://commons.wikimedia.org/wiki/File:Rosenthaler_Strasse_Berlin.jpg",
+      "credit": "Tiia Monto",
+      "license": "CC BY-SA 3.0"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Rosenthaler_Stra%C3%9Fe_%28200407183%29.jpeg/1280px-Rosenthaler_Stra%C3%9Fe_%28200407183%29.jpeg",
-      "alt": "Scheunenviertel / Spandauer Vorstadt – 500px provided description: Germany, Berlin &lt;a href=\"www.instagram.com/akavalerov/\"&gt;Instagram&lt;/a&gt; &lt;a href=\"kavalerov.name\"&gt;kavalerov.name&lt;/a&gt; (hi-res &amp; free) [#city ,#street ,#night ,#urban ,#lights ,#colors ,#art ,#posters]",
-      "source": "https://commons.wikimedia.org/wiki/File:Rosenthaler_Stra%C3%9Fe_(200407183).jpeg",
-      "credit": "Artem Kavalerov",
-      "license": "CC0"
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/F0412_Berlin_Mitte_Rosenthaler_Str_n39_street_art_rwk.jpg/1280px-F0412_Berlin_Mitte_Rosenthaler_Str_n39_street_art_rwk.jpg",
+      "alt": "Scheunenviertel / Spandauer Vorstadt – Rosenthaler Straße (Berlin-Mitte), n°39 (street art).",
+      "source": "https://commons.wikimedia.org/wiki/File:F0412_Berlin_Mitte_Rosenthaler_Str_n39_street_art_rwk.jpg",
+      "credit": "Mbzt",
+      "license": "CC BY 4.0"
     }
   ],
   "Snelle lunch rond Hackescher Markt": [
@@ -1451,32 +1451,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Hackescher_Markt_November_2013.jpg/1280px-Hackescher_Markt_November_2013.jpg",
-      "alt": "Snelle lunch rond Hackescher Markt – Station Hackescher Markt, Berlin.",
-      "source": "https://commons.wikimedia.org/wiki/File:Hackescher_Markt_November_2013.jpg",
-      "credit": "Arild Vågen",
-      "license": "CC BY-SA 3.0"
+      "src": "https://www.hackesche-hoefe.de/files/generate/500/1637794320_Canal_Berlin_Eclairs/canal-berlin.jpg",
+      "alt": "Snelle lunch rond Hackescher Markt – Éclairs van Canal Berlin in de Hackesche Höfe",
+      "source": "https://www.hackesche-hoefe.de/en/enjoy",
+      "credit": "Hackesche Höfe / Canal Berlin",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Berlin_-_S-Bahn-Strecke_und_Bahnhof_Hackescher_Markt.jpg/1280px-Berlin_-_S-Bahn-Strecke_und_Bahnhof_Hackescher_Markt.jpg",
-      "alt": "Snelle lunch rond Hackescher Markt – Berlin: View from Hotel Park Inn to railway lines and the station Hackescher Markt",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_S-Bahn-Strecke_und_Bahnhof_Hackescher_Markt.jpg",
-      "credit": "JoachimKohler-HB",
-      "license": "CC BY-SA 4.0"
+      "src": "https://www.hackesche-hoefe.de/files/generate/500/1637794346_Restaurant_Hackescher_Hof/restaurant-hackescher-hof.jpg",
+      "alt": "Snelle lunch rond Hackescher Markt – Lunchgerecht van Restaurant Hackescher Hof",
+      "source": "https://www.hackesche-hoefe.de/en/enjoy",
+      "credit": "Hackesche Höfe / Restaurant Hackescher Hof",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/El_Bocho%2C_Hackescher_Markt%2C_Berlin%2C_Germany.jpg/1280px-El_Bocho%2C_Hackescher_Markt%2C_Berlin%2C_Germany.jpg",
-      "alt": "Snelle lunch rond Hackescher Markt – Wheatpaste image of woman with text \"La Maladie D'Amour\"",
-      "source": "https://commons.wikimedia.org/wiki/File:El_Bocho,_Hackescher_Markt,_Berlin,_Germany.jpg",
-      "credit": "Stickerkitty",
-      "license": "CC BY-SA 4.0"
+      "src": "https://www.hackesche-hoefe.de/files/generate/500/1650470334_Roststatte_Berlin_Latte_Art_Uebersichtsseite/roeststaette.png",
+      "alt": "Snelle lunch rond Hackescher Markt – Koffie van Röststätte in de Hackesche Höfe",
+      "source": "https://www.hackesche-hoefe.de/en/enjoy",
+      "credit": "Hackesche Höfe / Röststätte",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Hackescher_Markt%2C_Berlin.jpg/1280px-Hackescher_Markt%2C_Berlin.jpg",
-      "alt": "Snelle lunch rond Hackescher Markt – Hackescher Markt S-Bahn station, Berlin",
-      "source": "https://commons.wikimedia.org/wiki/File:Hackescher_Markt,_Berlin.jpg",
-      "credit": "Chris Alban Hansen",
-      "license": "CC BY-SA 2.0"
+      "src": "https://www.hackesche-hoefe.de/files/generate/500/1725954953_20240619_Sawade_0410_V3_AnnikaYanura-2/sawade.jpg",
+      "alt": "Snelle lunch rond Hackescher Markt – Chocolade van Sawade in de Hackesche Höfe",
+      "source": "https://www.hackesche-hoefe.de/en/enjoy",
+      "credit": "Hackesche Höfe / Sawade",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Vertrek vanaf hotel": [
@@ -1488,32 +1488,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Berlin_-_Potsdamer_Platz_-_2016.jpg/1280px-Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "alt": "Berlin Marriott Hotel – Aerial view of Potsdamer Platz, Berlin 2016",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "credit": "Avda",
-      "license": "CC BY-SA 3.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-exterior-0147-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Buitenaanzicht van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg/1280px-Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg",
-      "alt": "Berlin Marriott Hotel – Potsdamer Platz , Berlin-Mitte with the following buildings (from left to right): Office building by Renzo Piano, Kollhoff-Tower (by Hans Kollhoff), Bahntower by Helmut Jahn, Beisheim Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_151024,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-atrium-0036-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Atrium en lobby van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg/1280px-Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg",
-      "alt": "Berlin Marriott Hotel – Detail of the Kollhoff-Tower (left) in front of Bahntower (right) at Potzdamer Platz, Berlin, Germany on a summer morning.",
-      "source": "https://commons.wikimedia.org/wiki/File:Detail,_Kollhoff_Tower_and_BahnTower,_Potsdamer_Platz,_Berlin,_Germany-3380.jpg",
-      "credit": "Slaunger",
-      "license": "CC BY-SA 4.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-double-room-6003-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Gastenkamer in het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Potsdamer_Platz_2015_03.jpg/1280px-Potsdamer_Platz_2015_03.jpg",
-      "alt": "Berlin Marriott Hotel – Buildings at the Potsdamer Platz as of May 2015.",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz_2015_03.jpg",
-      "credit": "Perituss",
-      "license": "CC0"
+      "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-bermc-bermc-pool-area-20720:Wide-Hor?wid=1280&fit=constrain",
+      "alt": "Berlin Marriott Hotel – Zwembad van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Terug naar hotel": [
@@ -1525,32 +1525,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Berlin_-_Potsdamer_Platz_-_2016.jpg/1280px-Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "alt": "Berlin Marriott Hotel – Aerial view of Potsdamer Platz, Berlin 2016",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "credit": "Avda",
-      "license": "CC BY-SA 3.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-exterior-0147-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Buitenaanzicht van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg/1280px-Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg",
-      "alt": "Berlin Marriott Hotel – Potsdamer Platz , Berlin-Mitte with the following buildings (from left to right): Office building by Renzo Piano, Kollhoff-Tower (by Hans Kollhoff), Bahntower by Helmut Jahn, Beisheim Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_151024,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-atrium-0036-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Atrium en lobby van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg/1280px-Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg",
-      "alt": "Berlin Marriott Hotel – Detail of the Kollhoff-Tower (left) in front of Bahntower (right) at Potzdamer Platz, Berlin, Germany on a summer morning.",
-      "source": "https://commons.wikimedia.org/wiki/File:Detail,_Kollhoff_Tower_and_BahnTower,_Potsdamer_Platz,_Berlin,_Germany-3380.jpg",
-      "credit": "Slaunger",
-      "license": "CC BY-SA 4.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-double-room-6003-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Gastenkamer in het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Potsdamer_Platz_2015_03.jpg/1280px-Potsdamer_Platz_2015_03.jpg",
-      "alt": "Berlin Marriott Hotel – Buildings at the Potsdamer Platz as of May 2015.",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz_2015_03.jpg",
-      "credit": "Perituss",
-      "license": "CC0"
+      "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-bermc-bermc-pool-area-20720:Wide-Hor?wid=1280&fit=constrain",
+      "alt": "Berlin Marriott Hotel – Zwembad van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Uitchecken & bagage opslaan": [
@@ -1562,32 +1562,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Berlin_-_Potsdamer_Platz_-_2016.jpg/1280px-Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "alt": "Berlin Marriott Hotel – Aerial view of Potsdamer Platz, Berlin 2016",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "credit": "Avda",
-      "license": "CC BY-SA 3.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-exterior-0147-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Buitenaanzicht van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg/1280px-Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg",
-      "alt": "Berlin Marriott Hotel – Potsdamer Platz , Berlin-Mitte with the following buildings (from left to right): Office building by Renzo Piano, Kollhoff-Tower (by Hans Kollhoff), Bahntower by Helmut Jahn, Beisheim Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_151024,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-atrium-0036-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Atrium en lobby van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg/1280px-Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg",
-      "alt": "Berlin Marriott Hotel – Detail of the Kollhoff-Tower (left) in front of Bahntower (right) at Potzdamer Platz, Berlin, Germany on a summer morning.",
-      "source": "https://commons.wikimedia.org/wiki/File:Detail,_Kollhoff_Tower_and_BahnTower,_Potsdamer_Platz,_Berlin,_Germany-3380.jpg",
-      "credit": "Slaunger",
-      "license": "CC BY-SA 4.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-double-room-6003-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Gastenkamer in het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Potsdamer_Platz_2015_03.jpg/1280px-Potsdamer_Platz_2015_03.jpg",
-      "alt": "Berlin Marriott Hotel – Buildings at the Potsdamer Platz as of May 2015.",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz_2015_03.jpg",
-      "credit": "Perituss",
-      "license": "CC0"
+      "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-bermc-bermc-pool-area-20720:Wide-Hor?wid=1280&fit=constrain",
+      "alt": "Berlin Marriott Hotel – Zwembad van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     }
   ],
   "Bagage ophalen bij hotel": [
@@ -1599,32 +1599,32 @@ window.BERLIN_GALLERIES = {
       "license": ""
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Berlin_-_Potsdamer_Platz_-_2016.jpg/1280px-Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "alt": "Berlin Marriott Hotel – Aerial view of Potsdamer Platz, Berlin 2016",
-      "source": "https://commons.wikimedia.org/wiki/File:Berlin_-_Potsdamer_Platz_-_2016.jpg",
-      "credit": "Avda",
-      "license": "CC BY-SA 3.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-exterior-0147-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Buitenaanzicht van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg/1280px-Potsdamer_Platz%2C_Berlin%2C_151024%2C_ako.jpg",
-      "alt": "Berlin Marriott Hotel – Potsdamer Platz , Berlin-Mitte with the following buildings (from left to right): Office building by Renzo Piano, Kollhoff-Tower (by Hans Kollhoff), Bahntower by Helmut Jahn, Beisheim Center (various architects).",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz,_Berlin,_151024,_ako.jpg",
-      "credit": "Ansgar Koreng",
-      "license": "CC BY-SA 3.0 de"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-atrium-0036-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Atrium en lobby van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg/1280px-Detail%2C_Kollhoff_Tower_and_BahnTower%2C_Potsdamer_Platz%2C_Berlin%2C_Germany-3380.jpg",
-      "alt": "Berlin Marriott Hotel – Detail of the Kollhoff-Tower (left) in front of Bahntower (right) at Potzdamer Platz, Berlin, Germany on a summer morning.",
-      "source": "https://commons.wikimedia.org/wiki/File:Detail,_Kollhoff_Tower_and_BahnTower,_Potsdamer_Platz,_Berlin,_Germany-3380.jpg",
-      "credit": "Slaunger",
-      "license": "CC BY-SA 4.0"
+      "src": "https://cache.marriott.com/content/dam/marriott-renditions/BERMC/bermc-double-room-6003-hor-wide.jpg?output-quality=82&interpolation=progressive-bilinear&downsize=1280px:*",
+      "alt": "Berlin Marriott Hotel – Gastenkamer in het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     },
     {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Potsdamer_Platz_2015_03.jpg/1280px-Potsdamer_Platz_2015_03.jpg",
-      "alt": "Berlin Marriott Hotel – Buildings at the Potsdamer Platz as of May 2015.",
-      "source": "https://commons.wikimedia.org/wiki/File:Potsdamer_Platz_2015_03.jpg",
-      "credit": "Perituss",
-      "license": "CC0"
+      "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-bermc-bermc-pool-area-20720:Wide-Hor?wid=1280&fit=constrain",
+      "alt": "Berlin Marriott Hotel – Zwembad van het Berlin Marriott Hotel",
+      "source": "https://www.marriott.com/en-us/hotels/bermc-berlin-marriott-hotel/photos/",
+      "credit": "Berlin Marriott Hotel",
+      "license": "Foto via officiële locatiepagina"
     }
   ]
 };
