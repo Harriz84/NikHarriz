@@ -1,0 +1,80 @@
+{
+  "Berlin Hauptbahnhof": {
+    "filename": "exact-berlin-hauptbahnhof.jpg",
+    "page": "Berlin Hauptbahnhof",
+    "pageUrl": "https://de.wikipedia.org/wiki/Berlin_Hauptbahnhof",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Berlin_Hauptbahnhof_Ostseite_HDR.jpg/1920px-Berlin_Hauptbahnhof_Ostseite_HDR.jpg"
+  },
+  "Potsdamer Platz & hotelomgeving": {
+    "filename": "exact-potsdamer-platz-hotelomgeving.jpg",
+    "page": "Potsdamer Platz",
+    "pageUrl": "https://de.wikipedia.org/wiki/Potsdamer_Platz",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Berlin_-_Potsdamer_Platz_-_2016.jpg/1920px-Berlin_-_Potsdamer_Platz_-_2016.jpg"
+  },
+  "Zoo Berlin": {
+    "filename": "exact-zoo-berlin.jpg",
+    "page": "Zoologischer Garten Berlin",
+    "pageUrl": "https://de.wikipedia.org/wiki/Zoologischer_Garten_Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Lentr%C3%A9e_du_Zoo_de_Berlin_%286081063158%29.jpg/1920px-Lentr%C3%A9e_du_Zoo_de_Berlin_%286081063158%29.jpg"
+  },
+  "Aquarium Berlin": {
+    "filename": "exact-aquarium-berlin.jpg",
+    "page": "Aquarium Berlin",
+    "pageUrl": "https://de.wikipedia.org/wiki/Aquarium_Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Zoo_Berlin_Aquarium_Fassade_3.jpg/1920px-Zoo_Berlin_Aquarium_Fassade_3.jpg"
+  },
+  "Bikini Berlin & stukje Kurfürstendamm": {
+    "filename": "exact-bikini-berlin-stukje-kurfurstendamm.jpg",
+    "page": "Bikini-Haus",
+    "pageUrl": "https://de.wikipedia.org/wiki/Bikini-Haus",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Bikini_Berlin_Stra%C3%9Fenansicht_2014.jpg/1920px-Bikini_Berlin_Stra%C3%9Fenansicht_2014.jpg"
+  },
+  "Holocaustmonument": {
+    "filename": "exact-holocaustmonument.jpg",
+    "page": "Denkmal für die ermordeten Juden Europas",
+    "pageUrl": "https://de.wikipedia.org/wiki/Denkmal_f%C3%BCr_die_ermordeten_Juden_Europas",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Memorial_to_the_Murdered_Jews_of_Europeabove.jpg/1920px-Memorial_to_the_Murdered_Jews_of_Europeabove.jpg"
+  },
+  "East Side Gallery": {
+    "filename": "exact-east-side-gallery.jpg",
+    "page": "East Side Gallery",
+    "pageUrl": "https://de.wikipedia.org/wiki/East_Side_Gallery",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/2/23/Bundesarchiv_B_145_Bild-F088809-0038%2C_Berlin%2C_East_Side_Gallery.jpg"
+  },
+  "Zicht op Molecule Man & Badeschiff": {
+    "filename": "exact-zicht-op-molecule-man-badeschiff.jpg",
+    "page": "Molecule Man",
+    "pageUrl": "https://de.wikipedia.org/wiki/Molecule_Man",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Molecule_Man_-_Berlin_-_2013.jpg/1920px-Molecule_Man_-_Berlin_-_2013.jpg"
+  },
+  "Boxhagener Platz vlooienmarkt": {
+    "filename": "exact-boxhagener-platz-vlooienmarkt.jpg",
+    "page": "Boxhagener Platz",
+    "pageUrl": "https://de.wikipedia.org/wiki/Boxhagener_Platz",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/7/73/Boxhagener_Platz_Berlin.jpg"
+  },
+  "Mauerpark markt & karaoke": {
+    "filename": "exact-mauerpark-markt-karaoke.jpg",
+    "page": "Mauerpark",
+    "pageUrl": "https://de.wikipedia.org/wiki/Mauerpark",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Berlin_Mauerpark_2022.jpg/1920px-Berlin_Mauerpark_2022.jpg"
+  },
+  "Berliner Dom": {
+    "filename": "exact-berliner-dom.jpg",
+    "page": "Berliner Dom",
+    "pageUrl": "https://de.wikipedia.org/wiki/Berliner_Dom",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/2023_Berliner_Dom_-_Westfassade_--_01.jpg/1920px-2023_Berliner_Dom_-_Westfassade_--_01.jpg"
+  },
+  "Snelle lunch rond Hackescher Markt": {
+    "filename": "exact-snelle-lunch-rond-hackescher-markt.jpg",
+    "page": "Hackescher Markt",
+    "pageUrl": "https://de.wikipedia.org/wiki/Hackescher_Markt",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Rosenberg_Hackescher_Markt_02_1780.jpg/1920px-Rosenberg_Hackescher_Markt_02_1780.jpg"
+  },
+  "Berlin Hauptbahnhof & vertrek": {
+    "filename": "exact-berlin-hauptbahnhof-vertrek.jpg",
+    "page": "Berlin Hauptbahnhof",
+    "pageUrl": "https://de.wikipedia.org/wiki/Berlin_Hauptbahnhof",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Berlin_Hauptbahnhof_Ostseite_HDR.jpg/1920px-Berlin_Hauptbahnhof_Ostseite_HDR.jpg"
+  }
+}
