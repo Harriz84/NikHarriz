@@ -122,3 +122,38 @@
     backdrop-filter:none;
   }
 }
+/* iPhone: houd de sluitknop altijd veilig onder de statusbalk en boven de inhoud. */
+.info-sheet{position:relative}
+.info-hero:after{pointer-events:none}
+.info-close{
+  z-index:220;
+  border:2px solid #d68c22;
+  width:48px;
+  height:48px;
+  min-width:48px;
+  min-height:48px;
+  font-size:28px;
+  font-weight:800;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  padding:0;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  box-shadow:0 5px 18px #0005;
+}
+@media(max-width:620px){
+  .info-close{
+    position:fixed;
+    top:calc(env(safe-area-inset-top, 0px) + 22px);
+    right:calc(env(safe-area-inset-right, 0px) + 18px);
+    width:54px;
+    height:54px;
+    min-width:54px;
+    min-height:54px;
+    z-index:300;
+    font-size:31px;
+    box-shadow:0 7px 24px #0008;
+  }
+}
