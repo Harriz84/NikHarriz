@@ -157,3 +157,36 @@
     box-shadow:0 7px 24px #0008;
   }
 }
+
+/* Uitgebreide locatieverhalen in de toon van een persoonlijke reisleider. */
+.info-block p+p{margin-top:10px}
+.guide-lead{
+  background:linear-gradient(145deg,#082746,#176c89);
+  color:#fff;
+  border:1px solid #ffffff24;
+}
+.guide-lead h3,.guide-lead p{color:#fff}
+.guide-lead p{font-size:15px;line-height:1.58}
+.story-block p,.experience-block p,.accent-block p,.guide-tip p{
+  font-size:14px;
+  line-height:1.62;
+}
+.experience-block{border-left:5px solid var(--b)}
+.layina-story{
+  background:#fff4d7;
+  border:2px solid #e5b553;
+  position:relative;
+}
+.layina-story h3{font-size:17px}
+.layina-story p{
+  color:#5d4211;
+  font-size:15px;
+  line-height:1.62;
+  font-weight:650;
+}
+.guide-tip{background:#edf8f1;border-left:5px solid var(--g)}
+.info-body>.score-card{margin-bottom:12px}
+@media(max-width:620px){
+  .infographic-grid{grid-template-columns:1fr}
+  .info-block,.info-block.wide{grid-column:1;min-height:0}
+}
