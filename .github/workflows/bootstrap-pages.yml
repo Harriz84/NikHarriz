@@ -35,6 +35,18 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Prepare interactive masterplan
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('clubroute/masterplan/index.html')
+          html = path.read_text(encoding='utf-8')
+          tag = '<script src="./app.js?v=2"></script>'
+          if tag not in html:
+              html = html.replace('</body>', tag + '\n</body>')
+          path.write_text(html, encoding='utf-8')
+          PY
+
       - name: Create or activate Pages site through API
         id: activate
         continue-on-error: true
