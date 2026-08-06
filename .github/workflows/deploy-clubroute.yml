@@ -40,6 +40,19 @@ jobs:
           cp index.html public/index.html
           cp -R clubroute public/clubroute
           cp -R clubroute/gezinsuitjes public/gezinsuitjes
+          cp -R clubroute/masterplan public/masterplan
+          python - <<'PY'
+          from pathlib import Path
+          tag = '<script src="./app.js?v=2"></script>'
+          for path in [
+              Path('public/masterplan/index.html'),
+              Path('public/clubroute/masterplan/index.html'),
+          ]:
+              html = path.read_text(encoding='utf-8')
+              if tag not in html:
+                  html = html.replace('</body>', tag + '\n</body>')
+              path.write_text(html, encoding='utf-8')
+          PY
           touch public/.nojekyll
 
       - name: Upload complete website
