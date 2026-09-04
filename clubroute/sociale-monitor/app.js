@@ -1,296 +1,103 @@
-const TEAL = '#068c8f';
-const TEAL_DARK = '#006d70';
-const ORANGE = '#ff8a1c';
-const MUTED = '#91a0ae';
-
-const POP_2026 = {
-  'Maasbroeksche Blokken': 726,
-  'Boxmeer buitengebied Oost': 48,
-  'Hollesteeg': 1320,
-  'De Elzen': 1547,
-  'Bakelgeert-Noord': 2602,
-  'Boxmeer Centrum': 2101,
-  'Villapark ’t Zand': 528,
-  'Boxmeer buitengebied West': 40,
-  'Bakelgeert-Zuid': 1121,
-  'Bedrijventerrein Saxa Gotha': 327,
-  'Luneven': 2571
+const TEAL='#068c8f', TEAL_DARK='#006d70', ORANGE='#ff8a1c', GREEN='#52b43b';
+const ORDER=['Maasbroeksche Blokken','Boxmeer buitengebied Oost','Hollesteeg','De Elzen','Bakelgeert-Noord','Boxmeer Centrum','Villapark ’t Zand','Boxmeer buitengebied West','Bakelgeert-Zuid','Bedrijventerrein Saxa Gotha','Luneven'];
+const PDOK_URL='https://api.pdok.nl/cbs/wijken-en-buurten-2025/ogc/v1/collections/buurten/items?f=json&limit=100&bbox=5.89,51.60,6.02,51.70';
+const CBS_BASE='https://opendata.cbs.nl/ODataApi/OData/';
+const DATASETS={
+  core:{id:'86165NED',name:'Kerncijfers wijken en buurten 2025',year:'2025',note:'Breedste CBS-buurtbestand: bevolking, wonen, inkomen, sociale zekerheid, zorg, energie, bedrijven, onderwijs en meer.'},
+  amenities:{id:'86270NED',name:'Nabijheid voorzieningen 2025',year:'2025',note:'Afstanden en aantallen voorzieningen zoals huisarts, apotheek, supermarkt, kinderopvang, scholen, horeca, station en groen.'},
+  benefits:{id:'86328NED',name:'Personen met een uitkering 2026',year:'2026 maart',note:'Actuele sociale zekerheid per wijk en buurt: WW, bijstand, arbeidsongeschiktheid en AOW.'}
 };
-
-const ORDER = [
-  'Maasbroeksche Blokken',
-  'Boxmeer buitengebied Oost',
-  'Hollesteeg',
-  'De Elzen',
-  'Bakelgeert-Noord',
-  'Boxmeer Centrum',
-  'Villapark ’t Zand',
-  'Boxmeer buitengebied West',
-  'Bakelgeert-Zuid',
-  'Bedrijventerrein Saxa Gotha',
-  'Luneven'
+const API_CATALOG=[
+  {name:'PDOK · CBS Wijken & Buurten 2025',status:'live',level:'Buurt · wijk',frequency:'Jaarlijkse indeling',auth:'Geen sleutel',desc:'Officiële geometrie, codes en basiskenmerken voor de kaart.',url:'https://api.pdok.nl/cbs/wijken-en-buurten-2025/ogc/v1'},
+  {name:'CBS StatLine · Kerncijfers 2025',status:'live',level:'Buurt · wijk · gemeente',frequency:'Ieder kwartaal indien nieuwe cijfers beschikbaar',auth:'Geen sleutel',desc:'Honderden indicatoren: demografie, huishoudens, wonen/WOZ, inkomen, energie, bedrijven, sociale zekerheid, zorg en onderwijs.',url:'https://opendata.cbs.nl/ODataApi/OData/86165NED'},
+  {name:'CBS StatLine · Nabijheid voorzieningen 2025',status:'live',level:'Buurt · wijk · gemeente',frequency:'Periodiek',auth:'Geen sleutel',desc:'Afstand tot en aantal huisartsen, apotheken, supermarkten, kinderopvang, scholen, horeca, stations en andere voorzieningen.',url:'https://opendata.cbs.nl/ODataApi/OData/86270NED'},
+  {name:'CBS StatLine · Uitkeringen 2026',status:'live',level:'Buurt · wijk · gemeente',frequency:'Per kwartaal',auth:'Geen sleutel',desc:'WW, bijstand, arbeidsongeschiktheid en AOW. Huidige tabel bevat maart 2026.',url:'https://opendata.cbs.nl/ODataApi/OData/86328NED'},
+  {name:'CBS StatLine · Energieverbruik woningen 2025',status:'ready',level:'Buurt · wijk · gemeente',frequency:'Jaarlijks',auth:'Geen sleutel',desc:'Aardgas, elektriciteitslevering, netto levering en stadsverwarming, uitgesplitst naar woningkenmerken.',url:'https://opendata.cbs.nl/ODataApi/OData/86333NED'},
+  {name:'CBS StatLine · Opleidingsniveau 2024',status:'ready',level:'Buurt · wijk · gemeente',frequency:'Jaarlijks',auth:'Geen sleutel',desc:'Laag, middelbaar en hoog opleidingsniveau met betrouwbaarheidsintervallen.',url:'https://opendata.cbs.nl/ODataApi/OData/86232NED'},
+  {name:'RIVM · Regiobeeld / Gezondheidsmonitor',status:'ready',level:'Wijk/buurt waar publiceerbaar · gemeente',frequency:'Monitorafhankelijk',auth:'Open JSON',desc:'Onder meer ervaren gezondheid, eenzaamheid, stress, roken, alcohol, bewegen, rondkomen, sociale samenhang en beperkingen. Niet elke indicator mag op buurtniveau worden gepubliceerd.',url:'https://data.rivm.nl/data/regiobeeld/config/figures/'},
+  {name:'Waarstaatjegemeente · VNG OData',status:'key',level:'Buurt · wijk · gemeente, afhankelijk van bron',frequency:'Bronafhankelijk',auth:'API-key nodig',desc:'Overkoepelende databank voor sociaal, fysiek, bestuur en veiligheid; bevat o.a. Wmo, jeugd, schulden, politie en RVO-bronnen.',url:'https://www.waarstaatjegemeente.nl/content/api'},
+  {name:'Politie via Waarstaatjegemeente',status:'key',level:'Buurt · wijk · gemeente',frequency:'Maandelijks (vorige maand rond de 15e)',auth:'WSJG API-key / bronkoppeling',desc:'Geregistreerde criminaliteit en veiligheidsindicatoren; bruikbaar tot buurtniveau.',url:'https://www.waarstaatjegemeente.nl/release/publicatiekalender.aspx'},
+  {name:'RVO · Regionale Klimaatmonitor',status:'ready',level:'Buurt · postcode · gemeente',frequency:'Onregelmatig per indicator',auth:'Bronafhankelijk',desc:'Energie, klimaat en verduurzaming. Staat ook als bron in Waarstaatjegemeente.',url:'https://www.waarstaatjegemeente.nl/release/publicatiekalender.aspx'},
+  {name:'DUO · onderwijs open data',status:'ready',level:'Vestiging · gemeente; sommige CBS-afgeleiden wijk',frequency:'Jaarlijks',auth:'Open data',desc:'Scholen, vestigingen, leerlingen en onderwijskenmerken. Aanvullend op CBS-onderwijsindicatoren.',url:'https://duo.nl/open_onderwijsdata/'}
 ];
 
-const TOTAL_2026 = Object.values(POP_2026).reduce((a,b)=>a+b,0);
-const PDOK_URL = 'https://api.pdok.nl/cbs/wijken-en-buurten-2025/ogc/v1/collections/buurten/items?f=json&limit=100&bbox=5.89,51.60,6.02,51.70';
+let featuresByName={}, geoLayer=null, selected='boxmeer', charts=[], currentDataset='core', currentView='overview';
+const cache=new Map(), metaCache=new Map();
+const map=L.map('map',{zoomControl:false,preferCanvas:true}).setView([51.646,5.948],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map); L.control.zoom({position:'topright'}).addTo(map);
+const normalize=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘`]/g,"'").trim();
+const allowed=new Map(ORDER.map(n=>[normalize(n),n]));
+const fmtInt=n=>validNumber(n)?new Intl.NumberFormat('nl-NL').format(Number(n)):'–';
+const fmtDec=(n,d=1)=>validNumber(n)?Number(n).toLocaleString('nl-NL',{minimumFractionDigits:d,maximumFractionDigits:d}):'–';
+function validNumber(v){return v!==null&&v!==undefined&&v!==''&&v!=='.'&&!Number.isNaN(Number(v))&&Number(v)>-99990}
+function prop(f,k){const v=f?.properties?.[k];return validNumber(v)?Number(v):null}
+function textProp(f,k){const v=f?.properties?.[k];return(v===null||v===undefined||String(v).includes('-9999'))?null:String(v)}
 
-let featuresByName = {};
-let selected = 'boxmeer';
-let geoLayer = null;
-let charts = [];
-let labelsEnabled = true;
-
-const map = L.map('map', { zoomControl:false, preferCanvas:true }).setView([51.646, 5.948], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom:19,
-  attribution:'© OpenStreetMap'
-}).addTo(map);
-L.control.zoom({position:'topright'}).addTo(map);
-
-const normalize = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘`]/g,"'").trim();
-const allowed = new Map(ORDER.map(n => [normalize(n), n]));
-const fmtInt = n => Number.isFinite(Number(n)) ? new Intl.NumberFormat('nl-NL').format(Number(n)) : '–';
-const fmtDec = (n,d=1) => Number.isFinite(Number(n)) ? Number(n).toLocaleString('nl-NL',{minimumFractionDigits:d,maximumFractionDigits:d}) : '–';
-const safe = v => (v === null || v === undefined || Number(v) <= -99990) ? null : Number(v);
-const pct = v => safe(v) === null ? '–' : `${fmtInt(v)}%`;
-
-function prop(feature,key){ return feature?.properties ? safe(feature.properties[key]) : null; }
-function textProp(feature,key){ const v=feature?.properties?.[key]; return (v===null||v===undefined||String(v).includes('-99997')) ? null : v; }
-
-function weightedPercent(features, field, weightField='aantal_inwoners'){
-  let num=0, den=0;
-  features.forEach(f=>{
-    const p=prop(f,field), w=prop(f,weightField);
-    if(p!==null && w!==null && w>0){ num += p*w; den += w; }
-  });
-  return den ? num/den : null;
+function regionCode(){
+  if(selected==='boxmeer') return Object.values(featuresByName)[0]?.properties?.wijkcode || 'WK198200';
+  return featuresByName[selected]?.properties?.buurtcode || null;
 }
-
+function regionLabel(){return selected==='boxmeer'?'Boxmeer':selected}
+function selectedFeature(){return selected==='boxmeer'?aggregateBoxmeer():featuresByName[selected]}
+function weightedPercent(fs,field,wf='aantal_inwoners'){let n=0,d=0;fs.forEach(f=>{const p=prop(f,field),w=prop(f,wf);if(p!==null&&w!==null&&w>0){n+=p*w;d+=w}});return d?n/d:null}
 function aggregateBoxmeer(){
-  const fs = ORDER.map(n=>featuresByName[n]).filter(Boolean);
-  const sum = field => fs.reduce((t,f)=>t+(prop(f,field)||0),0);
-  const households = sum('aantal_huishoudens');
-  const inwoners = sum('aantal_inwoners');
-  const land = sum('oppervlakte_land_in_ha');
-  const water = sum('oppervlakte_water_in_ha');
-  return {
-    name:'Boxmeer', type:'Wijk', properties:{
-      aantal_inwoners: inwoners || 12850,
-      aantal_huishoudens: households,
-      gemiddelde_huishoudsgrootte: households ? inwoners/households : null,
-      mannen: sum('mannen'), vrouwen: sum('vrouwen'),
-      oppervlakte_land_in_ha: land,
-      oppervlakte_water_in_ha: water,
-      bevolkingsdichtheid_inwoners_per_km2: land ? inwoners/(land/100) : null,
-      omgevingsadressendichtheid: weightedPercent(fs,'omgevingsadressendichtheid'),
-      percentage_personen_0_tot_15_jaar: weightedPercent(fs,'percentage_personen_0_tot_15_jaar'),
-      percentage_personen_15_tot_25_jaar: weightedPercent(fs,'percentage_personen_15_tot_25_jaar'),
-      percentage_personen_25_tot_45_jaar: weightedPercent(fs,'percentage_personen_25_tot_45_jaar'),
-      percentage_personen_45_tot_65_jaar: weightedPercent(fs,'percentage_personen_45_tot_65_jaar'),
-      percentage_personen_65_jaar_en_ouder: weightedPercent(fs,'percentage_personen_65_jaar_en_ouder'),
-      percentage_eenpersoonshuishoudens: weightedPercent(fs,'percentage_eenpersoonshuishoudens','aantal_huishoudens'),
-      percentage_huishoudens_zonder_kinderen: weightedPercent(fs,'percentage_huishoudens_zonder_kinderen','aantal_huishoudens'),
-      percentage_huishoudens_met_kinderen: weightedPercent(fs,'percentage_huishoudens_met_kinderen','aantal_huishoudens'),
-      percentage_met_herkomstland_nederland: weightedPercent(fs,'percentage_met_herkomstland_nederland'),
-      percentage_met_herkomstland_uit_europa_excl_nl: weightedPercent(fs,'percentage_met_herkomstland_uit_europa_excl_nl'),
-      percentage_met_herkomstland_buiten_europa: weightedPercent(fs,'percentage_met_herkomstland_buiten_europa')
-    }
-  };
+  const fs=ORDER.map(n=>featuresByName[n]).filter(Boolean),sum=k=>fs.reduce((a,f)=>a+(prop(f,k)||0),0),hh=sum('aantal_huishoudens'),pop=sum('aantal_inwoners'),land=sum('oppervlakte_land_in_ha');
+  return {properties:{aantal_inwoners:pop,aantal_huishoudens:hh,gemiddelde_huishoudsgrootte:hh?pop/hh:null,mannen:sum('mannen'),vrouwen:sum('vrouwen'),oppervlakte_land_in_ha:land,oppervlakte_water_in_ha:sum('oppervlakte_water_in_ha'),bevolkingsdichtheid_inwoners_per_km2:land?pop/(land/100):null,percentage_personen_0_tot_15_jaar:weightedPercent(fs,'percentage_personen_0_tot_15_jaar'),percentage_personen_15_tot_25_jaar:weightedPercent(fs,'percentage_personen_15_tot_25_jaar'),percentage_personen_25_tot_45_jaar:weightedPercent(fs,'percentage_personen_25_tot_45_jaar'),percentage_personen_45_tot_65_jaar:weightedPercent(fs,'percentage_personen_45_tot_65_jaar'),percentage_personen_65_jaar_en_ouder:weightedPercent(fs,'percentage_personen_65_jaar_en_ouder'),percentage_eenpersoonshuishoudens:weightedPercent(fs,'percentage_eenpersoonshuishoudens','aantal_huishoudens'),percentage_huishoudens_zonder_kinderen:weightedPercent(fs,'percentage_huishoudens_zonder_kinderen','aantal_huishoudens'),percentage_huishoudens_met_kinderen:weightedPercent(fs,'percentage_huishoudens_met_kinderen','aantal_huishoudens')}};
 }
 
-function selectedFeature(){
-  return selected === 'boxmeer' ? aggregateBoxmeer() : featuresByName[selected];
+async function fetchMeta(tableId){
+  if(metaCache.has(tableId)) return metaCache.get(tableId);
+  const r=await fetch(`${CBS_BASE}${tableId}/DataProperties`); if(!r.ok) throw new Error(`CBS metadata ${r.status}`); const j=await r.json();
+  const m={}; (j.value||[]).forEach(x=>{if(x.Key)m[x.Key]={title:x.Title||x.Key,unit:x.Unit||'',decimals:x.Decimals,description:x.Description||'',type:x.Type||''}}); metaCache.set(tableId,m); return m;
 }
-
-function currentPopulation(){ return selected === 'boxmeer' ? TOTAL_2026 : POP_2026[selected]; }
+async function fetchDataset(key,code=regionCode()){
+  if(!code) return {rows:[],meta:{}}; const ds=DATASETS[key],ck=`${ds.id}:${code}`; if(cache.has(ck)) return cache.get(ck);
+  const filter=encodeURIComponent(`WijkenEnBuurten eq '${code}'`); const url=`${CBS_BASE}${ds.id}/TypedDataSet?$filter=${filter}`;
+  try{const [rr,meta]=await Promise.all([fetch(url),fetchMeta(ds.id)]);if(!rr.ok)throw new Error(`CBS ${rr.status}`);const j=await rr.json();const out={rows:j.value||[],meta,url};cache.set(ck,out);return out}catch(e){console.warn(e);return {rows:[],meta:{},url,error:e.message}}
+}
+function prettyKey(k){return k.replace(/_\d+$/,'').replace(/([a-z])([A-Z])/g,'$1 $2').replace(/_/g,' ').replace(/^./,c=>c.toUpperCase())}
+function formatDatum(v,m={}){
+  if(v===null||v===undefined||v===''||v==='.')return '–'; const unit=(m.unit||'').trim();
+  if(validNumber(v)){const n=Number(v),d=Number.isInteger(n)?0:1;let val=n.toLocaleString('nl-NL',{maximumFractionDigits:Math.max(d,Number(m.decimals)||0)});if(unit==='%')return `${val}%`;if(/1 000 euro/i.test(unit))return `€ ${new Intl.NumberFormat('nl-NL').format(n*1000)}`;return unit?`${val} ${unit}`:val} return String(v);
+}
+function isMeasure(k,m){return !['ID','WijkenEnBuurten','Perioden','Marges','Opleidingsniveau','Woningkenmerken'].includes(k)&&!k.startsWith('odata.')&&(m?.type==='Topic'||m?.unit||/_[0-9]+$/.test(k))}
+function categoryFor(label){const s=normalize(label);if(/huishoud/.test(s))return'Huishoudens';if(/woz|woning|huur|koop|bouwjaar|vastgoed|nieuwbouw/.test(s))return'Wonen & vastgoed';if(/inkomen|armoed|vermogen|sociaal minimum/.test(s))return'Inkomen & bestaanszekerheid';if(/uitkering|bijstand|werkloos|aow|arbeidsongeschik|re-integr/.test(s))return'Sociale zekerheid';if(/wmo|jeugdzorg|zorg|maatwerk|mantelzorg/.test(s))return'Zorg & sociaal domein';if(/elektric|aardgas|energie|zonne|stadsverwarming|warmte/.test(s))return'Energie & duurzaamheid';if(/onderwijs|leerling|student|school/.test(s))return'Onderwijs & jeugd';if(/bedrijf|vestiging|sbi|werkzaam/.test(s))return'Bedrijven & economie';if(/afstand|huisarts|apotheek|supermarkt|kinderdag|restaurant|cafe|bibliotheek|station|voorziening/.test(s))return'Voorzieningen & bereikbaarheid';if(/auto|motorfiets|voertuig|vervoer/.test(s))return'Mobiliteit';if(/oppervlakte|dichtheid|stedelijk|postcode|land|water/.test(s))return'Ruimte & omgeving';if(/inwoner|mannen|vrouwen|leeftijd|geboorte|sterfte|herkomst|gehuwd|ongehuwd|gescheiden|verweduwd|bevolking/.test(s))return'Demografie';return'Overig'}
+function flattenRows(data){
+  const items=[];data.rows.forEach((row,ri)=>Object.entries(row).forEach(([k,v])=>{const m=data.meta[k]||{};if(!isMeasure(k,m)||v===null||v===undefined||v==='.')return;items.push({key:k,label:m.title||prettyKey(k),value:v,unit:m.unit||'',description:m.description||'',category:categoryFor(m.title||prettyKey(k)),row:ri,meta:m})}));return items;
+}
 
 function renderNeighbourLists(filter=''){
-  const q=normalize(filter);
-  const names=ORDER.filter(n=>normalize(n).includes(q));
-  const html=names.map(n=>`<button class="buurt-row ${selected===n?'active':''}" data-name="${n.replace(/"/g,'&quot;')}"><span>${n}</span><strong>${fmtInt(POP_2026[n])}</strong></button>`).join('');
-  document.getElementById('buurtList').innerHTML=html;
-  document.querySelectorAll('.buurt-row').forEach(btn=>btn.addEventListener('click',()=>selectArea(btn.dataset.name)));
-
-  document.getElementById('mobileBuurtStrip').innerHTML = [
-    `<button class="mobile-chip ${selected==='boxmeer'?'active':''}" data-name="boxmeer">Heel Boxmeer</button>`,
-    ...ORDER.map(n=>`<button class="mobile-chip ${selected===n?'active':''}" data-name="${n.replace(/"/g,'&quot;')}">${n}</button>`)
-  ].join('');
-  document.querySelectorAll('.mobile-chip').forEach(btn=>btn.addEventListener('click',()=>selectArea(btn.dataset.name)));
+  const q=normalize(filter),names=ORDER.filter(n=>normalize(n).includes(q));document.getElementById('buurtList').innerHTML=names.map(n=>`<button class="buurt-row ${selected===n?'active':''}" data-name="${n}"><span>${n}</span><strong>${fmtInt(prop(featuresByName[n],'aantal_inwoners'))}</strong></button>`).join('');
+  document.querySelectorAll('.buurt-row').forEach(b=>b.onclick=()=>selectArea(b.dataset.name));
+  document.getElementById('mobileBuurtStrip').innerHTML=[`<button class="mobile-chip ${selected==='boxmeer'?'active':''}" data-name="boxmeer">Heel Boxmeer</button>`,...ORDER.map(n=>`<button class="mobile-chip ${selected===n?'active':''}" data-name="${n}">${n}</button>`)].join('');
+  document.querySelectorAll('.mobile-chip').forEach(b=>b.onclick=()=>selectArea(b.dataset.name));
 }
+function layerStyle(f){const on=selected===f.properties.__name;return{color:on?ORANGE:TEAL_DARK,weight:on?4:1.7,fillColor:on?ORANGE:TEAL,fillOpacity:on?.30:.10}}
+function refreshLayer(){geoLayer?.eachLayer(l=>l.setStyle(layerStyle(l.feature)))}
+function findLayer(n){let x=null;geoLayer?.eachLayer(l=>{if(l.feature?.properties?.__name===n)x=l});return x}
+function fitBoxmeer(){if(geoLayer?.getBounds().isValid())map.fitBounds(geoLayer.getBounds(),{padding:[18,18]})}
+async function selectArea(name){if(name!=='boxmeer'&&!featuresByName[name])return;selected=name;renderNeighbourLists(document.getElementById('sideSearch')?.value||'');refreshLayer();if(name==='boxmeer')fitBoxmeer();else{const l=findLayer(name);if(l)map.fitBounds(l.getBounds(),{padding:[25,25],maxZoom:15})}await renderData();}
 
-function layerStyle(feature){
-  const name=feature.properties.__name;
-  const isSelected=selected===name;
-  return {
-    color: isSelected ? ORANGE : TEAL_DARK,
-    weight: isSelected ? 4 : 1.7,
-    fillColor: isSelected ? ORANGE : TEAL,
-    fillOpacity: isSelected ? .28 : .10
-  };
+async function renderData(){
+  const f=selectedFeature();if(!f)return;const p=f.properties||{},isWijk=selected==='boxmeer',code=regionCode();
+  document.getElementById('areaTitle').textContent=regionLabel();document.getElementById('areaSubtitle').textContent=isWijk?'Wijk in Land van Cuijk · 11 buurten':'Buurt in wijk Boxmeer · Land van Cuijk';document.getElementById('breadcrumbs').innerHTML=isWijk?'Land van Cuijk › <b>Boxmeer</b>':`Land van Cuijk › Boxmeer › <b>${selected}</b>`;document.getElementById('detailLevel').textContent=isWijk?'CBS wijkniveau':'CBS buurtniveau';
+  const [core,benefits]=await Promise.all([fetchDataset('core',code),fetchDataset('benefits',code)]);const crow=core.rows[0]||{};
+  const cv=(regex,fallback=null)=>{const k=Object.keys(crow).find(k=>regex.test((core.meta[k]?.title||k).toLowerCase()));return k?crow[k]:fallback};
+  const pop=cv(/aantal inwoners/,p.aantal_inwoners),hh=cv(/huishoudens totaal/,p.aantal_huishoudens),age65=cv(/65 jaar of ouder/,p.percentage_personen_65_jaar_en_ouder),woz=cv(/gemiddelde woz/,null);
+  document.getElementById('mapTotal').textContent=fmtInt(pop);document.getElementById('freshness').innerHTML=`<strong>Live opgehaald:</strong> CBS/PDOK · gebiedscode <b>${code||'–'}</b> · kerncijfers 2025 · uitkeringen maart 2026`;
+  const kpis=[['👥','Inwoners',fmtInt(pop),'CBS 2025'],['🏠','Huishoudens',fmtInt(hh),'CBS 2025'],['🧓','65+',validNumber(age65)?`${fmtInt(age65)}%`:'–','CBS 2025'],['🏡','Gem. WOZ',validNumber(woz)?`€ ${fmtInt(Number(woz)*1000)}`:'–','CBS 2025']];
+  document.getElementById('kpiGrid').innerHTML=kpis.map(x=>`<div class="kpi-card"><div class="kpi-top"><span class="kpi-icon">${x[0]}</span>${x[1]}</div><div class="kpi-value">${x[2]}</div><div class="kpi-meta">${x[3]}</div></div>`).join('');
+  const profile=[['Gem. huishouden',fmtDec(p.gemiddelde_huishoudsgrootte),'personen'],['Bevolkingsdichtheid',fmtInt(p.bevolkingsdichtheid_inwoners_per_km2),'inw./km²'],['Oppervlakte land',fmtInt(p.oppervlakte_land_in_ha),'hectare'],['Mannen',fmtInt(p.mannen),'CBS 2025'],['Vrouwen',fmtInt(p.vrouwen),'CBS 2025'],['Postcode',isWijk?'meerdere':(textProp(f,'meest_voorkomende_postcode')||'–'),'meest voorkomend']];
+  document.getElementById('profileGrid').innerHTML=profile.map(x=>`<div class="profile-item"><span>${x[0]}</span><strong>${x[1]}</strong><small>${x[2]}</small></div>`).join('');renderOverviewCharts(f);renderBenefits(benefits);
+  if(currentView==='all')renderAllData();
 }
+function renderBenefits(data){const items=flattenRows(data).filter(x=>/uitkering|inwoners vanaf/i.test(x.label));if(!items.length){document.getElementById('benefitGrid').innerHTML='<div class="empty-state">Voor dit gebied geeft de huidige CBS-tabel geen publiceerbare uitkeringswaarden terug.</div>';return}document.getElementById('benefitGrid').innerHTML=items.slice(0,8).map(x=>`<div class="benefit-card"><span>${x.label.replace(/personen per soort uitkering, relatief/i,'').trim()}</span><strong>${formatDatum(x.value,x.meta)}</strong><small>maart 2026</small></div>`).join('')}
+function renderOverviewCharts(f){charts.forEach(c=>c.destroy());charts=[];const p=f.properties||{},opts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#edf1f4'}}}};charts.push(new Chart(document.getElementById('ageChart'),{type:'bar',data:{labels:['0–15','15–25','25–45','45–65','65+'],datasets:[{data:['percentage_personen_0_tot_15_jaar','percentage_personen_15_tot_25_jaar','percentage_personen_25_tot_45_jaar','percentage_personen_45_tot_65_jaar','percentage_personen_65_jaar_en_ouder'].map(k=>prop(f,k)),backgroundColor:TEAL,borderRadius:6}]},options:{...opts,plugins:{title:{display:true,text:'Leeftijdsopbouw (%)',align:'start'},legend:{display:false}}}}));charts.push(new Chart(document.getElementById('householdChart'),{type:'doughnut',data:{labels:['Eenpersoon','Zonder kinderen','Met kinderen'],datasets:[{data:['percentage_eenpersoonshuishoudens','percentage_huishoudens_zonder_kinderen','percentage_huishoudens_met_kinderen'].map(k=>prop(f,k)),backgroundColor:[TEAL,ORANGE,GREEN],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'66%',plugins:{legend:{position:'bottom',labels:{boxWidth:9,usePointStyle:true}},title:{display:true,text:'Huishoudens (%)',align:'start'}}}}));const names=[...ORDER].sort((a,b)=>(prop(featuresByName[b],'aantal_inwoners')||0)-(prop(featuresByName[a],'aantal_inwoners')||0));charts.push(new Chart(document.getElementById('populationChart'),{type:'bar',data:{labels:names,datasets:[{data:names.map(n=>prop(featuresByName[n],'aantal_inwoners')),backgroundColor:names.map(n=>selected===n?ORANGE:TEAL),borderRadius:6}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'#edf1f4'}},y:{grid:{display:false}}}}}))}
 
-function refreshLayerStyles(){
-  if(!geoLayer) return;
-  geoLayer.eachLayer(layer=>{
-    const name=layer.feature?.properties?.__name;
-    layer.setStyle(layerStyle(layer.feature));
-    if(labelsEnabled && selected===name) layer.openTooltip(); else layer.closeTooltip();
-  });
-}
+async function renderAllData(){const container=document.getElementById('allDataContainer'),ds=DATASETS[currentDataset];container.innerHTML='<div class="loading-panel">Rechtstreeks ophalen uit '+ds.name+'…</div>';const data=await fetchDataset(currentDataset);let items=flattenRows(data);const q=normalize(document.getElementById('indicatorSearch')?.value||'');if(q)items=items.filter(x=>normalize(x.label+' '+x.category+' '+x.description).includes(q));document.getElementById('allCountBadge').textContent=items.length?items.length:'';document.getElementById('datasetInfo').innerHTML=`<strong>${ds.name}</strong><span>${ds.note}</span><code>${ds.id} · ${regionCode()||''}</code>`;if(!items.length){container.innerHTML='<div class="empty-state">Geen publiceerbare waarden gevonden voor deze selectie.</div>';return}const groups={};items.forEach(x=>(groups[x.category]??=[]).push(x));container.innerHTML=Object.entries(groups).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,arr])=>`<section class="data-group"><div class="data-group-title"><h3>${cat}</h3><span>${arr.length} indicatoren</span></div><div class="indicator-grid">${arr.map(x=>`<div class="indicator-card" title="${(x.description||'').replace(/"/g,'&quot;')}"><span>${x.label}</span><strong>${formatDatum(x.value,x.meta)}</strong><small>${x.meta.unit||ds.year}</small></div>`).join('')}</div></section>`).join('')}
+function renderApiCatalog(){document.getElementById('apiGrid').innerHTML=API_CATALOG.map(a=>`<a class="api-card" href="${a.url}" target="_blank" rel="noopener"><div class="api-card-top"><strong>${a.name}</strong><span class="api-status ${a.status}">${a.status==='live'?'LIVE':a.status==='key'?'SLEUTEL NODIG':'BESCHIKBAAR'}</span></div><p>${a.desc}</p><div class="api-meta"><span>📍 ${a.level}</span><span>↻ ${a.frequency}</span><span>🔑 ${a.auth}</span></div><code>${a.url}</code></a>`).join('')}
+function setView(v){currentView=v;document.querySelectorAll('.view-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));document.querySelectorAll('.view-pane').forEach(p=>p.classList.remove('active'));document.getElementById(`view-${v}`).classList.add('active');if(v==='all')renderAllData();if(v==='apis')renderApiCatalog()}
 
-function selectArea(name){
-  if(name!=='boxmeer' && !featuresByName[name]) return;
-  selected=name;
-  renderNeighbourLists(document.getElementById('sideSearch')?.value || '');
-  renderData();
-  refreshLayerStyles();
-
-  if(name==='boxmeer'){
-    fitBoxmeer();
-    document.querySelector('[data-level="wijk"]')?.classList.add('active');
-    document.querySelector('[data-level="buurt"]')?.classList.remove('active');
-  } else {
-    const layer=findLayer(name);
-    if(layer) map.fitBounds(layer.getBounds(),{padding:[28,28],maxZoom:15});
-    document.querySelector('[data-level="wijk"]')?.classList.remove('active');
-    document.querySelector('[data-level="buurt"]')?.classList.add('active');
-  }
-}
-
-function findLayer(name){
-  let found=null;
-  geoLayer?.eachLayer(l=>{ if(l.feature?.properties?.__name===name) found=l; });
-  return found;
-}
-
-function fitBoxmeer(){ if(geoLayer && geoLayer.getBounds().isValid()) map.fitBounds(geoLayer.getBounds(),{padding:[18,18]}); }
-
-function renderData(){
-  const f=selectedFeature();
-  if(!f) return;
-  const p=f.properties || {};
-  const isWijk=selected==='boxmeer';
-
-  document.getElementById('areaTitle').textContent=isWijk?'Boxmeer':selected;
-  document.getElementById('areaSubtitle').textContent=isWijk?'Wijk in Land van Cuijk · 11 buurten':'Buurt in wijk Boxmeer · Land van Cuijk';
-  document.getElementById('breadcrumbs').innerHTML=isWijk?'Land van Cuijk &nbsp;›&nbsp; <b>Boxmeer</b>':`Land van Cuijk &nbsp;›&nbsp; Boxmeer &nbsp;›&nbsp; <b>${selected}</b>`;
-  document.getElementById('detailLevel').textContent=isWijk?'Geaggregeerd uit CBS-buurten':'CBS-buurtniveau';
-  document.getElementById('freshness').innerHTML=`<strong>Actualiteit:</strong> inwoners <b>2026</b> · demografie/huishoudens/ruimte <b>2025</b>${!isWijk && textProp(f,'buurtcode') ? ` · ${textProp(f,'buurtcode')}`:''}`;
-
-  const kpis=[
-    ['👥','Inwoners',fmtInt(currentPopulation()),'2026'],
-    ['🏠','Huishoudens',fmtInt(safe(p.aantal_huishoudens)),'CBS 2025'],
-    ['🧓','65+',pct(p.percentage_personen_65_jaar_en_ouder),'CBS 2025'],
-    ['👤','Eenpersoon',pct(p.percentage_eenpersoonshuishoudens),'huishoudens · 2025']
-  ];
-  document.getElementById('kpiGrid').innerHTML=kpis.map(([icon,label,value,meta])=>`<div class="kpi-card"><div class="kpi-top"><span class="kpi-icon">${icon}</span>${label}</div><div class="kpi-value">${value}</div><div class="kpi-meta">${meta}</div></div>`).join('');
-
-  const land=safe(p.oppervlakte_land_in_ha), water=safe(p.oppervlakte_water_in_ha);
-  const profile=[
-    ['Gem. huishouden', safe(p.gemiddelde_huishoudsgrootte)!==null?fmtDec(p.gemiddelde_huishoudsgrootte):'–','personen'],
-    ['Bevolkingsdichtheid', fmtInt(safe(p.bevolkingsdichtheid_inwoners_per_km2)),'inw./km²'],
-    ['Oppervlakte land', land!==null?fmtInt(land):'–','hectare'],
-    ['Oppervlakte water', water!==null?fmtInt(water):'–','hectare'],
-    ['Mannen', fmtInt(safe(p.mannen)),'CBS 2025'],
-    ['Vrouwen', fmtInt(safe(p.vrouwen)),'CBS 2025'],
-    ['Herkomst Nederland', pct(p.percentage_met_herkomstland_nederland),'inwoners'],
-    ['Herkomst buiten Europa', pct(p.percentage_met_herkomstland_buiten_europa),'inwoners']
-  ];
-  if(!isWijk){ profile.push(['Meest voorkomende postcode', textProp(f,'meest_voorkomende_postcode') || '–','CBS 2025']); }
-  document.getElementById('profileGrid').innerHTML=profile.map(([label,value,meta])=>`<div class="profile-item"><span>${label}</span><strong>${value}</strong><small>${meta}</small></div>`).join('');
-
-  renderCharts(f);
-}
-
-function renderCharts(f){
-  charts.forEach(c=>c.destroy()); charts=[];
-  const p=f.properties || {};
-  const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{beginAtZero:true,grid:{color:'#edf1f4'},ticks:{font:{size:10}}}}};
-
-  const ageVals=[p.percentage_personen_0_tot_15_jaar,p.percentage_personen_15_tot_25_jaar,p.percentage_personen_25_tot_45_jaar,p.percentage_personen_45_tot_65_jaar,p.percentage_personen_65_jaar_en_ouder].map(v=>safe(v));
-  charts.push(new Chart(document.getElementById('ageChart'),{
-    type:'bar',
-    data:{labels:['0–15','15–25','25–45','45–65','65+'],datasets:[{data:ageVals,backgroundColor:TEAL,borderRadius:6}]},
-    options:{...baseOpts,plugins:{...baseOpts.plugins,title:{display:true,text:'Leeftijdsopbouw (%)',align:'start',font:{size:12,weight:'700'}}},scales:{...baseOpts.scales,y:{...baseOpts.scales.y,suggestedMax:35,ticks:{callback:v=>v+'%',font:{size:10}}}}}
-  }));
-
-  const hhVals=[p.percentage_eenpersoonshuishoudens,p.percentage_huishoudens_zonder_kinderen,p.percentage_huishoudens_met_kinderen].map(v=>safe(v));
-  charts.push(new Chart(document.getElementById('householdChart'),{
-    type:'doughnut',
-    data:{labels:['Eenpersoon','Zonder kinderen','Met kinderen'],datasets:[{data:hhVals,backgroundColor:[TEAL,ORANGE,'#52b43b'],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'66%',plugins:{legend:{position:'bottom',labels:{boxWidth:9,usePointStyle:true,font:{size:9}}},title:{display:true,text:'Huishoudens (%)',align:'start',font:{size:12,weight:'700'}}}}
-  }));
-
-  const names=[...ORDER].sort((a,b)=>POP_2026[b]-POP_2026[a]);
-  charts.push(new Chart(document.getElementById('populationChart'),{
-    type:'bar',
-    data:{labels:names,datasets:[{data:names.map(n=>POP_2026[n]),backgroundColor:names.map(n=>selected===n?ORANGE:TEAL),borderRadius:6}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'#edf1f4'},ticks:{font:{size:9}}},y:{grid:{display:false},ticks:{font:{size:9}}}}}
-  }));
-}
-
-async function loadPDOK(){
-  const status=document.getElementById('mapStatus');
-  try{
-    const res=await fetch(PDOK_URL,{headers:{'Accept':'application/geo+json, application/json'}});
-    if(!res.ok) throw new Error(`PDOK ${res.status}`);
-    const data=await res.json();
-    const matches=(data.features||[]).filter(f=>allowed.has(normalize(f.properties?.buurtnaam)));
-    matches.forEach(f=>{
-      const canonical=allowed.get(normalize(f.properties.buurtnaam));
-      f.properties.__name=canonical;
-      featuresByName[canonical]=f;
-    });
-    if(Object.keys(featuresByName).length<11) console.warn('Niet alle Boxmeer-buurten gevonden',Object.keys(featuresByName));
-
-    geoLayer=L.geoJSON({type:'FeatureCollection',features:matches},{
-      style:layerStyle,
-      onEachFeature:(feature,layer)=>{
-        const name=feature.properties.__name;
-        layer.bindTooltip(`<strong>${name}</strong><br>${fmtInt(POP_2026[name])} inwoners · 2026`,{sticky:true,className:'area-tooltip'});
-        layer.on('click',()=>selectArea(name));
-        layer.on('mouseover',()=>{ if(selected!==name) layer.setStyle({fillOpacity:.20,weight:2.5}); });
-        layer.on('mouseout',()=>refreshLayerStyles());
-      }
-    }).addTo(map);
-
-    status.textContent=`CBS-kaart · ${Object.keys(featuresByName).length} buurten`;
-    status.classList.add('ok');
-    fitBoxmeer();
-    renderNeighbourLists();
-    renderData();
-  } catch(err){
-    console.error(err);
-    status.textContent='CBS-kaart kon niet laden';
-    status.classList.add('error');
-    document.getElementById('freshness').innerHTML='<strong>Let op:</strong> de live CBS-kaartlaag kon niet laden. De actuele inwoneraantallen 2026 blijven zichtbaar.';
-    renderNeighbourLists();
-    // fallback aggregate cards based on current population only
-    document.getElementById('kpiGrid').innerHTML=`<div class="kpi-card"><div class="kpi-top">👥 Inwoners</div><div class="kpi-value">${fmtInt(TOTAL_2026)}</div><div class="kpi-meta">2026</div></div>`;
-  }
-}
-
-function wireUI(){
-  document.getElementById('fitButton').addEventListener('click',()=>selectArea('boxmeer'));
-  document.getElementById('showAllButton').addEventListener('click',()=>selectArea('boxmeer'));
-  document.getElementById('sideSearch').addEventListener('input',e=>renderNeighbourLists(e.target.value));
-  document.getElementById('globalSearch').addEventListener('keydown',e=>{
-    if(e.key!=='Enter') return;
-    const q=normalize(e.target.value);
-    const match=ORDER.find(n=>normalize(n).includes(q));
-    if(match) selectArea(match);
-  });
-  document.getElementById('boundaryToggle').addEventListener('change',e=>{
-    if(!geoLayer) return;
-    if(e.target.checked) geoLayer.addTo(map); else map.removeLayer(geoLayer);
-  });
-  document.getElementById('labelsToggle').addEventListener('change',e=>{ labelsEnabled=e.target.checked; refreshLayerStyles(); });
-  document.querySelectorAll('#levelSwitch button').forEach(btn=>btn.addEventListener('click',()=>{
-    if(btn.dataset.level==='wijk') selectArea('boxmeer');
-    if(btn.dataset.level==='buurt' && selected==='boxmeer') selectArea('Boxmeer Centrum');
-  }));
-}
-
-wireUI();
-renderNeighbourLists();
-loadPDOK();
+async function loadPDOK(){const status=document.getElementById('mapStatus');try{const r=await fetch(PDOK_URL,{headers:{Accept:'application/geo+json, application/json'}});if(!r.ok)throw new Error(r.status);const d=await r.json(),matches=(d.features||[]).filter(f=>allowed.has(normalize(f.properties?.buurtnaam)));matches.forEach(f=>{const name=allowed.get(normalize(f.properties.buurtnaam));f.properties.__name=name;featuresByName[name]=f});geoLayer=L.geoJSON(matches,{style:layerStyle,onEachFeature:(f,l)=>{const n=f.properties.__name;l.bindTooltip(`<strong>${n}</strong><br>${fmtInt(prop(f,'aantal_inwoners'))} inwoners · 2025`,{className:'area-tooltip',sticky:true});l.on('click',()=>selectArea(n))}}).addTo(map);status.textContent=`● ${matches.length}/11 CBS-buurten live`;status.classList.add('ok');renderNeighbourLists();fitBoxmeer();await renderData()}catch(e){console.error(e);status.textContent='Kaart-API niet bereikbaar';status.classList.add('error')}}
+function bindUI(){document.getElementById('fitButton').onclick=()=>selectArea('boxmeer');document.getElementById('showAllButton').onclick=()=>selectArea('boxmeer');document.getElementById('sideSearch').oninput=e=>renderNeighbourLists(e.target.value);document.getElementById('globalSearch').addEventListener('change',e=>{const q=normalize(e.target.value),n=ORDER.find(x=>normalize(x).includes(q));if(n)selectArea(n)});document.querySelectorAll('.view-tabs button').forEach(b=>b.onclick=()=>setView(b.dataset.view));document.querySelectorAll('.dataset-pills button').forEach(b=>b.onclick=()=>{currentDataset=b.dataset.dataset;document.querySelectorAll('.dataset-pills button').forEach(x=>x.classList.toggle('active',x===b));renderAllData()});document.getElementById('indicatorSearch').oninput=()=>renderAllData();document.querySelectorAll('#levelSwitch button[data-level]').forEach(b=>b.onclick=()=>{if(b.dataset.level==='wijk')selectArea('boxmeer')});}
+bindUI();renderApiCatalog();loadPDOK();
