@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Sociale Monitor Land van Cuijk — Prototype</title>
+  <meta name="theme-color" content="#068c8f" />
+  <title>Sociale Monitor Boxmeer — Land van Cuijk</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   <link rel="stylesheet" href="./styles.css" />
@@ -13,64 +14,54 @@
     <aside class="sidebar">
       <div class="brand">
         <div class="brand-mark">S</div>
-        <div>
-          <strong>Sociale Monitor</strong>
-          <span>Land van Cuijk</span>
-        </div>
+        <div><strong>Sociale Monitor</strong><span>Land van Cuijk</span></div>
       </div>
-
-      <section class="sidebar-section">
-        <div class="section-title">Kaartlagen</div>
-        <label><input type="checkbox" checked /> Gebiedsgrenzen</label>
-        <label><input type="checkbox" checked /> Voorzieningen</label>
-        <label><input type="checkbox" checked /> Openbare ruimte</label>
-        <label><input type="checkbox" /> Achtergrondinfo</label>
-      </section>
 
       <section class="sidebar-section">
         <div class="section-title">Gebiedsniveau</div>
         <div class="segmented" id="levelSwitch">
-          <button data-level="gemeente">Gemeente</button>
-          <button data-level="wijk">Wijk</button>
-          <button class="active" data-level="buurt">Buurt</button>
+          <button data-level="gemeente" disabled>Gemeente</button>
+          <button class="active" data-level="wijk">Wijk</button>
+          <button data-level="buurt">Buurt</button>
         </div>
       </section>
 
+      <section class="sidebar-section grow buurt-section">
+        <div class="section-title">Boxmeer · 11 buurten</div>
+        <div class="side-search"><input id="sideSearch" placeholder="Zoek buurt…" /></div>
+        <div class="buurt-list" id="buurtList"></div>
+      </section>
+
       <section class="sidebar-section">
-        <div class="section-title">Vergelijk</div>
-        <label class="toggle-row">Vergelijk gebieden <input id="compareToggle" type="checkbox" checked></label>
-        <div class="compare-list" id="compareList"></div>
+        <div class="section-title">Kaartlaag</div>
+        <label><input id="boundaryToggle" type="checkbox" checked /> CBS-buurtgrenzen 2025</label>
+        <label><input id="labelsToggle" type="checkbox" checked /> Buurtnamen bij selectie</label>
       </section>
 
-      <section class="sidebar-section grow">
-        <div class="section-title">Thema's</div>
-        <div class="theme-grid" id="themeGrid"></div>
-      </section>
-
-      <div class="sidebar-footer">Laatste update: <strong>6 mei 2025</strong><span class="refresh-dot">↻</span></div>
+      <div class="sidebar-footer">CBS/PDOK 2025 · inwoners 2026 <span class="refresh-dot">●</span></div>
     </aside>
 
     <main class="main">
       <header class="topbar">
-        <div class="breadcrumbs" id="breadcrumbs"></div>
+        <div class="breadcrumbs" id="breadcrumbs">Land van Cuijk › <b>Boxmeer</b></div>
         <div class="top-actions">
-          <div class="search">⌕ <input placeholder="Zoek adres, plaats of gebied..." /></div>
-          <button title="Opslaan">☆</button>
-          <button title="Download">⇩</button>
-          <button title="Meldingen">♢</button>
-          <div class="avatar">NV</div>
+          <div class="search">⌕ <input id="globalSearch" placeholder="Zoek een buurt in Boxmeer..." /></div>
+          <div class="avatar">SM</div>
         </div>
       </header>
 
       <div class="content-grid">
         <section class="map-panel">
-          <div class="map-toolbar"><button>◈ Weergave</button></div>
+          <div class="map-toolbar">
+            <button id="fitButton">⌂ Heel Boxmeer</button>
+            <div class="map-status" id="mapStatus">CBS-kaart laden…</div>
+          </div>
           <div id="map"></div>
           <div class="map-card">
-            <strong>Land van Cuijk</strong>
-            <div class="mini-map">◖◗</div>
-            <div><span class="dot blue"></span>Boxmeer</div>
-            <button>Bekijk regio →</button>
+            <strong>Wijk Boxmeer</strong>
+            <div class="map-total"><span id="mapTotal">12.931</span><small> inwoners · 2026</small></div>
+            <div><span class="dot teal"></span>11 officiële buurten</div>
+            <button id="showAllButton">Toon alle buurten →</button>
           </div>
         </section>
 
@@ -78,28 +69,47 @@
           <div class="insights-scroll">
             <div class="area-heading">
               <div>
-                <div class="title-row"><span class="pin">●</span><h1 id="areaTitle">Bakelgeert-Noord</h1><span>☆</span></div>
-                <p id="areaSubtitle">Buurt in Boxmeer · Land van Cuijk</p>
+                <div class="title-row"><span class="pin">●</span><h1 id="areaTitle">Boxmeer</h1><span>☆</span></div>
+                <p id="areaSubtitle">Wijk in Land van Cuijk · 11 buurten</p>
               </div>
-              <span class="concept-badge">Dummy / concept</span>
+              <span class="live-badge">● Actuele bronnen</span>
             </div>
 
-            <div class="kpi-grid" id="kpiGrid"></div>
-
-            <div class="subhead">Beschikbare inzichten <span>ⓘ Niet alle indicatoren zijn op buurtniveau beschikbaar</span></div>
-            <div class="insight-grid" id="insightGrid"></div>
-
-            <div class="comparison-block">
-              <div class="subhead">Vergelijking <span id="compareLegend"></span></div>
-              <div class="comparison-grid" id="comparisonGrid"></div>
+            <div class="freshness" id="freshness">
+              <strong>Actualiteit:</strong> inwoners 2026 · overige officiële buurtkerncijfers 2025
             </div>
 
-            <div class="trend-block">
-              <div class="subhead">Trend</div>
-              <div class="trend-grid">
-                <canvas id="populationChart"></canvas>
-                <canvas id="incomeChart"></canvas>
-              </div>
+            <div class="mobile-buurt-strip" id="mobileBuurtStrip"></div>
+
+            <div class="kpi-grid" id="kpiGrid">
+              <div class="kpi-card skeleton"></div><div class="kpi-card skeleton"></div><div class="kpi-card skeleton"></div><div class="kpi-card skeleton"></div>
+            </div>
+
+            <div class="subhead">Profiel <span id="detailLevel">CBS-buurtniveau</span></div>
+            <div class="profile-grid" id="profileGrid"></div>
+
+            <div class="subhead">Leeftijd & huishoudens <span>officiële kerncijfers 2025</span></div>
+            <div class="chart-grid">
+              <div class="chart-card"><canvas id="ageChart"></canvas></div>
+              <div class="chart-card"><canvas id="householdChart"></canvas></div>
+            </div>
+
+            <div class="subhead">Alle buurten van Boxmeer <span>inwoners 2026</span></div>
+            <div class="ranking-card"><canvas id="populationChart"></canvas></div>
+
+            <div class="subhead">Databronnen & uitbreidingen</div>
+            <div class="source-grid">
+              <a class="source-card" href="https://api.pdok.nl/cbs/wijken-en-buurten-2025/ogc/v1" target="_blank" rel="noopener">
+                <strong>CBS / PDOK</strong><span>Officiële buurtgrenzen, demografie, huishoudens en oppervlakte · 2025</span><em>Live API</em>
+              </a>
+              <a class="source-card" href="https://allecijfers.nl/wijk/boxmeer-land-van-cuijk/" target="_blank" rel="noopener">
+                <strong>Actuele bevolking</strong><span>Inwoners per buurt · 2026, gebaseerd op CBS-data</span><em>2026</em>
+              </a>
+              <div class="source-card future"><strong>Volgende koppelingen</strong><span>Wonen/WOZ · inkomen · veiligheid · gezondheid · sociaal domein</span><em>uitbreidbaar</em></div>
+            </div>
+
+            <div class="method-note">
+              <strong>Datakwaliteit.</strong> De site toont per indicator het meest recente beschikbare meetjaar. Er worden geen buurtwaarden geschat als een bron alleen wijk- of gemeenteniveau levert.
             </div>
           </div>
         </section>
