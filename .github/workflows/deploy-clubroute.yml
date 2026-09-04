@@ -41,6 +41,7 @@ jobs:
           cp -R clubroute public/clubroute
           cp -R clubroute/gezinsuitjes public/gezinsuitjes
           cp -R clubroute/masterplan public/masterplan
+          cp -R clubroute/sociale-monitor public/sociale-monitor
           python - <<'PY'
           from pathlib import Path
           tag = '<script src="./app.js?v=2"></script>'
